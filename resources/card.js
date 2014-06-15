@@ -1,9 +1,11 @@
 
 var httpClient = require('../lib/httpClient')
   , httpMethod = require('../lib/httpMethod')
+  , errorCodes = require('../lib/errorCodes')
   , utils = require('../lib/utils')
 
 var https = require('https')
+var qs = require('querystring')
 var Url = require('url')
 
 module.exports = httpClient.extend({
@@ -27,6 +29,9 @@ module.exports = httpClient.extend({
       middleware: function(err, data, response, urlData, next){
         var self = this
 
+        if(response.statusCode != 200)
+          return next(data || err || true, null)
+
         // after obtaining a cardRegistration object
         // we send the card details to the PSP (payline) url
         var cardDetails = {
@@ -37,18 +42,16 @@ module.exports = httpClient.extend({
           cardCvx: urlData.CardCvx
         }
 
-        response.statusCode != 200
-          ? next(data || err || true, null)
-          : this.sendCardDetails.call(self, data, cardDetails, next)
+        this.sendCardDetails.call(self, data, cardDetails, next)
       }
     }),
 
-    sendCardDetails: function(cardRegistration, cardDetail, next){
+    sendCardDetails: function(cardRegistration, cardDetails, next){
       var self = this
 
-      // parse CardRegistrationURL & urlencode cardDetail
+      // parse CardRegistrationURL & urlencode cardDetails
       url = Url.parse(cardRegistration.CardRegistrationURL)
-      cardDetail = utils.stringifyRequestData(cardDetail || {})
+      cardDetails = utils.stringifyRequestData(cardDetails || {})
 
       // prepare outside HTTP call
       var req = https.request({
@@ -64,11 +67,14 @@ module.exports = httpClient.extend({
         res.on('data', function(chunk){ body += chunk })
         res.on('end', function(){ 
 
-          // todo: handle error
+          body = qs.parse(body)
+          
+          if(body.errorCode)
+            return next.call(self, errorCodes[body.errorCode])
 
           self.completeRegistration.call(self, {
             Id: cardRegistration.Id,
-            RegistrationData: body
+            RegistrationData: qs.stringify(body) // data=hashkey
           }, next)
 
         })
@@ -80,7 +86,7 @@ module.exports = httpClient.extend({
 
       req.on('socket', function(socket){
         socket.on('secureConnect', function(){
-          req.write(cardDetail)
+          req.write(cardDetails)
           req.end()
         })
       })

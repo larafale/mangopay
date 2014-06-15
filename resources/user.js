@@ -27,6 +27,12 @@ module.exports = httpClient.extend({
       requiredParams: ['Id']
     }),
 
+    update: httpMethod({
+      method: 'PUT',
+      path: 'natural/{Id}',
+      requiredParams: ['Id']
+    }),
+
     cards: httpMethod({
       method: 'GET',
       path: '{UserId}/cards',
