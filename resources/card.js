@@ -1,7 +1,7 @@
 
 var httpClient = require('../lib/httpClient')
   , httpMethod = require('../lib/httpMethod')
-  , errorCodes = require('../lib/errorCodes')
+  , error = require('../lib/error')
   , utils = require('../lib/utils')
 
 var https = require('https')
@@ -70,7 +70,7 @@ module.exports = httpClient.extend({
           body = qs.parse(body)
           
           if(body.errorCode)
-            return next.call(self, errorCodes[body.errorCode])
+            return next.call(self, error(body.errorCode))
 
           self.completeRegistration.call(self, {
             Id: cardRegistration.Id,
