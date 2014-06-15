@@ -2,7 +2,7 @@
 
 This is not the official Mangopay Node library.  
 At this time they don't have one, so we'll see what's next.  
-It's here for a personnal use and inspired by Stripe node api wrapper.
+It's here for a personal use and inspired by Stripe node api wrapper.
 
 Feel free to use & contribute
 
