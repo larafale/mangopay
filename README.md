@@ -1,4 +1,10 @@
-# Mango node.js API v2 Wrapper
+# MangoPay nodejs APIv2 wrapper
+
+This is not the official Mangopay Node library.  
+At this time they don't have one, so we'll see what's next.  
+It's here for a personnal use and inspired by Stripe node api wrapper.
+
+Feel free to use & contribute
 
 ## Installation
 
@@ -6,7 +12,7 @@
 
 ## Documentation
 
-Documentation is available at http://docs.mangopay.com/api-references
+Documentation is available at [http://docs.mangopay.com/api-references](http://docs.mangopay.com/api-references)
 
 ## API Overview
 
@@ -15,23 +21,25 @@ Every resource is accessed via your `mango` instance:
 ```js
 var mango = require('mangopay')({
     username: 'username',
-    password: 'pathphrase',
+    password: 'passphrase',
     production: false
-});
-
-// mango.{ RESOURCE_NAME }.{ METHOD_NAME }
+})
+// mango.{ RESOURCE_NAME }.{ METHOD_NAME }()
 ```
 
 Every resource method accepts an optional callback as the last argument:
 
 ```js
-mango.user.create(
-  { email: 'customer@example.com' },
-  function(err, user) {
-    err; // null if no error occurred
-    customer; // the created user object
-  }
-);
+mango.card.create({ 
+  UserId: '2565355',
+  CardNumber: '4970100000000154',
+  CardExpirationDate: '0216',
+  CardCvx: '123',
+}, function(err, card, res){
+  err;	
+  card; // mango card object 
+  res; // raw 'http' response object => res.statusCode === 200
+})
 ```
 
 ### Available resources & methods
@@ -58,4 +66,12 @@ mango.user.create(
 
 * author
   * `create(params)`
+  
+ 
+### Todos
+ 
+ * oauth implementation
+ * user methods only works for "Natural Users"
+ * exhaustive api methods
+ * ...
  
