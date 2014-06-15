@@ -1,0 +1,145 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'publish' ]
+2 info using npm@1.3.11
+3 info using node@v0.10.21
+4 verbose publish [ '.' ]
+5 verbose cache add [ '.', null ]
+6 verbose cache add name=undefined spec="." args=[".",null]
+7 verbose parsed url { protocol: null,
+7 verbose parsed url   slashes: null,
+7 verbose parsed url   auth: null,
+7 verbose parsed url   host: null,
+7 verbose parsed url   port: null,
+7 verbose parsed url   hostname: null,
+7 verbose parsed url   hash: null,
+7 verbose parsed url   search: null,
+7 verbose parsed url   query: null,
+7 verbose parsed url   pathname: '.',
+7 verbose parsed url   path: '.',
+7 verbose parsed url   href: '.' }
+8 silly lockFile 3a52ce78- .
+9 verbose lock . /Users/louis/.npm/3a52ce78-.lock
+10 verbose tar pack [ '/var/folders/tw/7_sf1hx91wlbfx6wx98561x80000gn/T/npm-8991-cowJfi7k/1402853412644-0.30956204957328737/tmp.tgz',
+10 verbose tar pack   '.' ]
+11 verbose tarball /var/folders/tw/7_sf1hx91wlbfx6wx98561x80000gn/T/npm-8991-cowJfi7k/1402853412644-0.30956204957328737/tmp.tgz
+12 verbose folder .
+13 silly lockFile 1f1177db-tar tar://.
+14 verbose lock tar://. /Users/louis/.npm/1f1177db-tar.lock
+15 silly lockFile 1cf5786c-2644-0-30956204957328737-tmp-tgz tar:///var/folders/tw/7_sf1hx91wlbfx6wx98561x80000gn/T/npm-8991-cowJfi7k/1402853412644-0.30956204957328737/tmp.tgz
+16 verbose lock tar:///var/folders/tw/7_sf1hx91wlbfx6wx98561x80000gn/T/npm-8991-cowJfi7k/1402853412644-0.30956204957328737/tmp.tgz /Users/louis/.npm/1cf5786c-2644-0-30956204957328737-tmp-tgz.lock
+17 silly lockFile 1f1177db-tar tar://.
+18 silly lockFile 1f1177db-tar tar://.
+19 silly lockFile 1cf5786c-2644-0-30956204957328737-tmp-tgz tar:///var/folders/tw/7_sf1hx91wlbfx6wx98561x80000gn/T/npm-8991-cowJfi7k/1402853412644-0.30956204957328737/tmp.tgz
+20 silly lockFile 1cf5786c-2644-0-30956204957328737-tmp-tgz tar:///var/folders/tw/7_sf1hx91wlbfx6wx98561x80000gn/T/npm-8991-cowJfi7k/1402853412644-0.30956204957328737/tmp.tgz
+21 verbose tar unpack /var/folders/tw/7_sf1hx91wlbfx6wx98561x80000gn/T/npm-8991-cowJfi7k/1402853412644-0.30956204957328737/tmp.tgz
+22 silly lockFile f8b6eb3d-2644-0-30956204957328737-package tar:///var/folders/tw/7_sf1hx91wlbfx6wx98561x80000gn/T/npm-8991-cowJfi7k/1402853412644-0.30956204957328737/package
+23 verbose lock tar:///var/folders/tw/7_sf1hx91wlbfx6wx98561x80000gn/T/npm-8991-cowJfi7k/1402853412644-0.30956204957328737/package /Users/louis/.npm/f8b6eb3d-2644-0-30956204957328737-package.lock
+24 silly lockFile 1cf5786c-2644-0-30956204957328737-tmp-tgz tar:///var/folders/tw/7_sf1hx91wlbfx6wx98561x80000gn/T/npm-8991-cowJfi7k/1402853412644-0.30956204957328737/tmp.tgz
+25 verbose lock tar:///var/folders/tw/7_sf1hx91wlbfx6wx98561x80000gn/T/npm-8991-cowJfi7k/1402853412644-0.30956204957328737/tmp.tgz /Users/louis/.npm/1cf5786c-2644-0-30956204957328737-tmp-tgz.lock
+26 silly gunzTarPerm modes [ '755', '644' ]
+27 silly gunzTarPerm extractEntry package.json
+28 silly gunzTarPerm extractEntry .npmignore
+29 silly gunzTarPerm extractEntry README.md
+30 silly gunzTarPerm extractEntry index.js
+31 silly gunzTarPerm extractEntry lib/error.js
+32 silly gunzTarPerm extractEntry lib/httpClient.js
+33 silly gunzTarPerm extractEntry lib/httpMethod.js
+34 silly gunzTarPerm extractEntry lib/utils.js
+35 silly gunzTarPerm extractEntry resources/author.js
+36 silly gunzTarPerm extractEntry resources/bank.js
+37 silly gunzTarPerm extractEntry resources/card.js
+38 silly gunzTarPerm extractEntry resources/user.js
+39 silly gunzTarPerm extractEntry resources/wallet.js
+40 silly gunzTarPerm extractEntry test/lib.js
+41 silly lockFile f8b6eb3d-2644-0-30956204957328737-package tar:///var/folders/tw/7_sf1hx91wlbfx6wx98561x80000gn/T/npm-8991-cowJfi7k/1402853412644-0.30956204957328737/package
+42 silly lockFile f8b6eb3d-2644-0-30956204957328737-package tar:///var/folders/tw/7_sf1hx91wlbfx6wx98561x80000gn/T/npm-8991-cowJfi7k/1402853412644-0.30956204957328737/package
+43 silly lockFile 1cf5786c-2644-0-30956204957328737-tmp-tgz tar:///var/folders/tw/7_sf1hx91wlbfx6wx98561x80000gn/T/npm-8991-cowJfi7k/1402853412644-0.30956204957328737/tmp.tgz
+44 silly lockFile 1cf5786c-2644-0-30956204957328737-tmp-tgz tar:///var/folders/tw/7_sf1hx91wlbfx6wx98561x80000gn/T/npm-8991-cowJfi7k/1402853412644-0.30956204957328737/tmp.tgz
+45 verbose tar pack [ '/Users/louis/.npm/mangopay/0.0.2/package.tgz',
+45 verbose tar pack   '/var/folders/tw/7_sf1hx91wlbfx6wx98561x80000gn/T/npm-8991-cowJfi7k/1402853412644-0.30956204957328737/package' ]
+46 verbose tarball /Users/louis/.npm/mangopay/0.0.2/package.tgz
+47 verbose folder /var/folders/tw/7_sf1hx91wlbfx6wx98561x80000gn/T/npm-8991-cowJfi7k/1402853412644-0.30956204957328737/package
+48 silly lockFile f8b6eb3d-2644-0-30956204957328737-package tar:///var/folders/tw/7_sf1hx91wlbfx6wx98561x80000gn/T/npm-8991-cowJfi7k/1402853412644-0.30956204957328737/package
+49 verbose lock tar:///var/folders/tw/7_sf1hx91wlbfx6wx98561x80000gn/T/npm-8991-cowJfi7k/1402853412644-0.30956204957328737/package /Users/louis/.npm/f8b6eb3d-2644-0-30956204957328737-package.lock
+50 silly lockFile 35e94645-s-npm-mangopay-0-0-2-package-tgz tar:///Users/louis/.npm/mangopay/0.0.2/package.tgz
+51 verbose lock tar:///Users/louis/.npm/mangopay/0.0.2/package.tgz /Users/louis/.npm/35e94645-s-npm-mangopay-0-0-2-package-tgz.lock
+52 silly lockFile f8b6eb3d-2644-0-30956204957328737-package tar:///var/folders/tw/7_sf1hx91wlbfx6wx98561x80000gn/T/npm-8991-cowJfi7k/1402853412644-0.30956204957328737/package
+53 silly lockFile f8b6eb3d-2644-0-30956204957328737-package tar:///var/folders/tw/7_sf1hx91wlbfx6wx98561x80000gn/T/npm-8991-cowJfi7k/1402853412644-0.30956204957328737/package
+54 silly lockFile 35e94645-s-npm-mangopay-0-0-2-package-tgz tar:///Users/louis/.npm/mangopay/0.0.2/package.tgz
+55 silly lockFile 35e94645-s-npm-mangopay-0-0-2-package-tgz tar:///Users/louis/.npm/mangopay/0.0.2/package.tgz
+56 silly lockFile 71c1a30c-louis-npm-mangopay-0-0-2-package /Users/louis/.npm/mangopay/0.0.2/package
+57 verbose lock /Users/louis/.npm/mangopay/0.0.2/package /Users/louis/.npm/71c1a30c-louis-npm-mangopay-0-0-2-package.lock
+58 silly lockFile 71c1a30c-louis-npm-mangopay-0-0-2-package /Users/louis/.npm/mangopay/0.0.2/package
+59 silly lockFile 71c1a30c-louis-npm-mangopay-0-0-2-package /Users/louis/.npm/mangopay/0.0.2/package
+60 verbose tar unpack /Users/louis/.npm/mangopay/0.0.2/package.tgz
+61 silly lockFile 661ccb96-louis-npm-mangopay-0-0-2-package tar:///Users/louis/.npm/mangopay/0.0.2/package
+62 verbose lock tar:///Users/louis/.npm/mangopay/0.0.2/package /Users/louis/.npm/661ccb96-louis-npm-mangopay-0-0-2-package.lock
+63 silly lockFile 35e94645-s-npm-mangopay-0-0-2-package-tgz tar:///Users/louis/.npm/mangopay/0.0.2/package.tgz
+64 verbose lock tar:///Users/louis/.npm/mangopay/0.0.2/package.tgz /Users/louis/.npm/35e94645-s-npm-mangopay-0-0-2-package-tgz.lock
+65 silly gunzTarPerm modes [ '755', '644' ]
+66 silly gunzTarPerm extractEntry package.json
+67 silly gunzTarPerm extractEntry .npmignore
+68 silly gunzTarPerm extractEntry README.md
+69 silly gunzTarPerm extractEntry index.js
+70 silly gunzTarPerm extractEntry lib/error.js
+71 silly gunzTarPerm extractEntry lib/httpClient.js
+72 silly gunzTarPerm extractEntry lib/httpMethod.js
+73 silly gunzTarPerm extractEntry lib/utils.js
+74 silly gunzTarPerm extractEntry resources/author.js
+75 silly gunzTarPerm extractEntry resources/bank.js
+76 silly gunzTarPerm extractEntry resources/card.js
+77 silly gunzTarPerm extractEntry resources/user.js
+78 silly gunzTarPerm extractEntry resources/wallet.js
+79 silly gunzTarPerm extractEntry test/lib.js
+80 silly lockFile 661ccb96-louis-npm-mangopay-0-0-2-package tar:///Users/louis/.npm/mangopay/0.0.2/package
+81 silly lockFile 661ccb96-louis-npm-mangopay-0-0-2-package tar:///Users/louis/.npm/mangopay/0.0.2/package
+82 silly lockFile 35e94645-s-npm-mangopay-0-0-2-package-tgz tar:///Users/louis/.npm/mangopay/0.0.2/package.tgz
+83 silly lockFile 35e94645-s-npm-mangopay-0-0-2-package-tgz tar:///Users/louis/.npm/mangopay/0.0.2/package.tgz
+84 verbose chmod /Users/louis/.npm/mangopay/0.0.2/package.tgz 644
+85 verbose chown /Users/louis/.npm/mangopay/0.0.2/package.tgz [ 501, 20 ]
+86 silly lockFile 3a52ce78- .
+87 silly lockFile 3a52ce78- .
+88 silly publish { name: 'mangopay',
+88 silly publish   version: '0.0.2',
+88 silly publish   description: 'Mango API wrapper',
+88 silly publish   homepage: 'https://github.com/larafale/mangopay',
+88 silly publish   author: { name: 'Louis Grellet @Larafale', email: 'as1cron@gmail.com' },
+88 silly publish   main: 'index.js',
+88 silly publish   repository: { type: 'git', url: 'git://github.com/larafale/mangopay.git' },
+88 silly publish   engines: { node: '0.10.x', npm: '1.1.x' },
+88 silly publish   devDependencies: { mocha: '~1.20.1', chai: '~1.9.1' },
+88 silly publish   dependencies: { when: '~3.1.0' },
+88 silly publish   scripts: { test: 'mocha -R spec' },
+88 silly publish   readme: '# MangoPay nodejs APIv2 wrapper\n\nThis is not the official Mangopay Node library.  \nAt this time they don\'t have one, so we\'ll see what\'s next.  \nIt\'s here for a personal use and inspired by Stripe node api wrapper.\n\nFeel free to use & contribute\n\n## Installation\n\n`npm install mangopay`\n\n## Documentation\n\nDocumentation is available at [http://docs.mangopay.com/api-references](http://docs.mangopay.com/api-references)\n\n## API Overview\n\nEvery resource is accessed via your `mango` instance:\n\n```js\nvar mango = require(\'mangopay\')({\n    username: \'username\',\n    password: \'passphrase\',\n    production: false\n})\n// mango.{ RESOURCE_NAME }.{ METHOD_NAME }()\n```\n\nEvery resource method accepts an optional callback as the last argument:\n\n```js\nmango.card.create({ \n  UserId: \'2565355\',\n  CardNumber: \'4970100000000154\',\n  CardExpirationDate: \'0216\',\n  CardCvx: \'123\',\n}, function(err, card, res){\n  err;\t\n  card; // mango card object \n  res; // raw \'http\' response object => res.statusCode === 200\n})\n```\n\n### Available resources & methods\n\n*Where you see `params` it is a plain JavaScript object, e.g. `{ Email: \'foo@example.com\' }`*\n\n* user\n  * `create(params)`\n  * `fetch(params)`\n  * `list()`\n  * `cards(params)`\n  * `wallets(params)`\n  * `tansactions(params)`\n  * `banks(params)`\n\n* bank\n  * `create(params)`\n  * `fetch(params)`\n  * `wire(params)`\n  * `fetchWire(params)`\n\n* wallet\n  * `create(params)`\n  * `fetch(params)`\n  * `transfer(params)`\n  * `payin(params)`\n  * `tansactions(params)`\n\n* card\n  * `create(params)`\n\n* author\n  * `create(params)`\n  \n \n### Test\n\n`npm test`  \ndon\'t forget to provide credentials in `test/__credentials.json`\n\n### Todos\n \n * oauth implementation\n * user methods only works for "Natural Users"\n * exhaustive api methods\n * ...\n ',
+88 silly publish   readmeFilename: 'README.md',
+88 silly publish   bugs: { url: 'https://github.com/larafale/mangopay/issues' },
+88 silly publish   _id: 'mangopay@0.0.2',
+88 silly publish   dist: { shasum: 'c67c5b8cc66f510cce237c3b2405aa8276e45358' },
+88 silly publish   _from: '.' }
+89 verbose url raw mangopay
+90 verbose url resolving [ 'https://registry.npmjs.org/', './mangopay' ]
+91 verbose url resolved https://registry.npmjs.org/mangopay
+92 info trying registry request attempt 1 at 19:30:12
+93 http PUT https://registry.npmjs.org/mangopay
+94 http 201 https://registry.npmjs.org/mangopay
+95 verbose url raw mangopay
+96 verbose url resolving [ 'https://registry.npmjs.org/', './mangopay' ]
+97 verbose url resolved https://registry.npmjs.org/mangopay
+98 info trying registry request attempt 1 at 19:30:14
+99 http GET https://registry.npmjs.org/mangopay
+100 http 200 https://registry.npmjs.org/mangopay
+101 error publish fail Cannot publish over existing version.
+101 error publish fail Update the 'version' field in package.json and try again.
+101 error publish fail
+101 error publish fail If the previous version was published in error, see:
+101 error publish fail     npm help unpublish
+101 error publish fail
+101 error publish fail To automatically increment version numbers, see:
+101 error publish fail     npm help version
+102 error System Darwin 12.5.0
+103 error command "/usr/local/bin/node" "/usr/local/bin/npm" "publish"
+104 error cwd /Users/louis/Sites/mangopay
+105 error node -v v0.10.21
+106 error npm -v 1.3.11
+107 error code EPUBLISHCONFLICT
+108 verbose exit [ 1, true ]
