@@ -53,6 +53,13 @@ mango.card.create({
   * `cards(params)`
   * `wallets(params)`
   * `tansactions(params)`
+  * `banks(params)`
+
+* bank
+  * `create(params)`
+  * `fetch(params)`
+  * `wire(params)`
+  * `fetchWire(params)`
 
 * wallet
   * `create(params)`
@@ -68,6 +75,11 @@ mango.card.create({
   * `create(params)`
   
  
+### Test
+
+`npm test`  
+don't forget to provide credentials in `test/__credentials.json`
+
 ### Todos
  
  * oauth implementation

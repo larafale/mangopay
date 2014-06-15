@@ -44,6 +44,12 @@ module.exports = httpClient.extend({
       path: '{UserId}/transactions?status={status}',
       queryParams: ['status'],
       requiredParams: ['UserId']
+    }),
+
+    banks: httpMethod({
+      method: 'GET',
+      path: '{UserId}/bankaccounts',
+      requiredParams: ['UserId']
     })
 
   }

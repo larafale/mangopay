@@ -13,23 +13,24 @@ function Mango(options){
     protocol: 'https',
     host: 'api.sandbox.mangopay.com',
     port: '',
-    basePath: '/v2/' + options.username,
+    basePath: '/v2/' + this._options.username,
     timeout: 30 * 1000
   }
 
   if(this._options.production)
     this._api.host = 'api.mangopay.com'
 
-  this.mount(this._options.mount || 'user|card|wallet')
+  this.mount(this._options.mount || 'user|card|wallet|author|bank')
   this.setAuth(options)
 }
 
 Mango.prototype = {
 
   setAuth: function(key){
-    utils.isAuthKey(key)
-      ? (this._api.auth = 'Basic ' + new Buffer(key.username + ':' + key.password).toString('base64'))
-      : false // todo, raise error
+    if(utils.isAuthKey(key))
+      this._api.auth = 'Basic ' + new Buffer(key.username + ':' + key.password).toString('base64')
+    else
+      throw Error('Provide credentials')
   },
 
   mount: function(resources){
