@@ -1,0 +1,25 @@
+{
+  "name": "mangopay",
+  "version": "0.0.1",
+  "description": "Mango API wrapper",
+  "homepage": "https://github.com/larafale/mangopay",
+  "author": "Louis Grellet @Larafale <as1cron@gmail.com>",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/larafale/mangopay.git"
+  },
+  "engines": {
+    "node": "0.10.x",
+    "npm": "1.1.x"
+  },
+  "devDependencies": {
+    
+  },
+  "dependencies": {
+    "when": "~3.1.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  }
+}
