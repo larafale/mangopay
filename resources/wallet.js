@@ -6,7 +6,7 @@ module.exports = httpClient.extend({
   
   path: 'wallets',
   
-  includeBasic: [ ],
+  includeBasic: [ 'fetch' ],
 
   methods: {
 
@@ -18,12 +18,6 @@ module.exports = httpClient.extend({
         Description: 'user wallet',
         Currency: 'EUR'
       }
-    }),
-
-    fetch: httpMethod({
-      method: 'GET',
-      path: '{Id}',
-      requiredParams: ['Id']
     }),
 
     transfer: httpMethod({
