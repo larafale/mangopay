@@ -24,6 +24,24 @@ module.exports = httpClient.extend({
       }
     }),
 
+    signup: httpMethod(
+      {
+        method: 'POST',
+        path: 'natural',
+        requiredParams: ['Email','FirstName','LastName','Birthday','Nationality','CountryOfResidence'],
+        defaultParams: {
+          Nationality: 'FR',
+          CountryOfResidence: 'FR'
+        }
+      },
+      function(err, body, response, params, next){
+        if(err)
+          return next(err, null)
+
+        this._root.wallet.create({ Owners: [body.Id] }, next)
+      }
+    ),
+
     fetch: httpMethod({
       method: 'GET',
       path: 'natural/{Id}',
