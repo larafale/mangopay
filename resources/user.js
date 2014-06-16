@@ -28,15 +28,18 @@ module.exports = httpClient.extend({
       {
         method: 'POST',
         path: 'natural',
-        requiredParams: ['Email','FirstName','LastName','Birthday','Nationality','CountryOfResidence'],
-        defaultParams: {
-          Nationality: 'FR',
-          CountryOfResidence: 'FR'
+        params:{
+            'Email': { required: true }
+          , 'FirstName': { required: true }
+          , 'LastName': { required: true }
+          , 'Birthday': { required: true }
+          , 'Nationality': { required: true, default: 'FR' }
+          , 'CountryOfResidence': { required: true, default: 'FR' }
         }
       },
-      function(err, body, response, params, next){
+      function(err, body, res, params, next){
         if(err)
-          return next(err, null)
+          return next(err, null, res)
 
         this._root.wallet.create({ Owners: [body.Id] }, next)
       }

@@ -26,11 +26,11 @@ module.exports = httpClient.extend({
         , 'CardExpirationDate': { required: true, default: '0216' }
         , 'CardCvx': { required: true, default: '123' }
       }
-    }, function(err, body, response, params, next){
+    }, function(err, body, res, params, next){
         var self = this
 
-        if(response.statusCode != 200)
-          return next(body || err || true, null)
+        if(err)
+          return next(err, null, res)
 
         // after obtaining a cardRegistration object
         // we send the card details to the PSP (payline) url
