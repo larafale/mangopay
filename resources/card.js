@@ -16,35 +16,37 @@ module.exports = httpClient.extend({
 
   methods: {
 
-    create: httpMethod({
-      method: 'POST',
-      path: '',
-      requiredParams: ['UserId', 'Currency','CardNumber','CardExpirationDate','CardCvx'],
-      defaultParams: {
-        Currency: 'EUR',
-        CardNumber: '4970100000000154',
-        CardExpirationDate: '0216',
-        CardCvx: '123',
-      },
-      middleware: function(err, data, response, urlData, next){
+    create: httpMethod(
+      {
+        method: 'POST',
+        path: '',
+        requiredParams: ['UserId', 'Currency','CardNumber','CardExpirationDate','CardCvx'],
+        defaultParams: {
+          Currency: 'EUR',
+          CardNumber: '4970100000000154',
+          CardExpirationDate: '0216',
+          CardCvx: '123',
+        }
+      }, 
+      function(err, body, response, params, next){
         var self = this
 
         if(response.statusCode != 200)
-          return next(data || err || true, null)
+          return next(body || err || true, null)
 
         // after obtaining a cardRegistration object
         // we send the card details to the PSP (payline) url
         var cardDetails = {
-          data: data.PreregistrationData,
-          accessKeyRef: data.AccessKey,
-          cardNumber: urlData.CardNumber,
-          cardExpirationDate: urlData.CardExpirationDate,
-          cardCvx: urlData.CardCvx
+          body: body.PreregistrationData,
+          accessKeyRef: body.AccessKey,
+          cardNumber: params.CardNumber,
+          cardExpirationDate: params.CardExpirationDate,
+          cardCvx: params.CardCvx
         }
 
-        this.sendCardDetails.call(self, data, cardDetails, next)
+        this.sendCardDetails.call(self, body, cardDetails, next)
       }
-    }),
+    ),
 
     sendCardDetails: function(cardRegistration, cardDetails, next){
       var self = this

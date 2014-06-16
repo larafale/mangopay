@@ -73,6 +73,9 @@ mango.card.create({
 
 * author
   * `create(params)`
+
+* document
+  * `create(params)`
   
  
 ### Test
