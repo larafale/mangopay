@@ -14,48 +14,50 @@ module.exports = httpClient.extend({
     create: httpMethod({
       method: 'POST',
       path: 'natural',
-      requiredParams: ['Email','FirstName','LastName','Birthday','Nationality','CountryOfResidence'],
-      defaultParams: {
-        Nationality: 'FR',
-        CountryOfResidence: 'FR'
+      params: {
+          'Email': { required: true }
+        , 'FirstName': { required: true }
+        , 'LastName': { required: true }
+        , 'Birthday': { required: true }
+        , 'Nationality': { required: true, default: 'FR' }
+        , 'CountryOfResidence': { required: true, default: 'FR' }
       }
     }),
 
     fetch: httpMethod({
       method: 'GET',
       path: 'natural/{Id}',
-      requiredParams: ['Id']
+      params: { 'Id': { required: true } }
     }),
 
     update: httpMethod({
       method: 'PUT',
       path: 'natural/{Id}',
-      requiredParams: ['Id']
+      params: { 'Id': { required: true } }
     }),
 
     cards: httpMethod({
       method: 'GET',
       path: '{UserId}/cards',
-      requiredParams: ['UserId']
+      params: { 'UserId': { required: true } }
     }),
 
     wallets: httpMethod({
       method: 'GET',
       path: '{UserId}/wallets',
-      requiredParams: ['UserId']
+      params: { 'UserId': { required: true } }
     }),
 
     transactions: httpMethod({
       method: 'GET',
-      path: '{UserId}/transactions?status={status}',
-      queryParams: ['status'],
-      requiredParams: ['UserId']
+      path: '{UserId}/transactions',
+      params: { 'UserId': { required: true } }
     }),
 
     banks: httpMethod({
       method: 'GET',
       path: '{UserId}/bankaccounts',
-      requiredParams: ['UserId']
+      params: { 'UserId': { required: true } }
     })
 
   }

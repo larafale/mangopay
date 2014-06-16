@@ -13,10 +13,12 @@ module.exports = httpClient.extend({
     create: httpMethod({
       method: 'POST',
       path: 'card/direct',
-      requiredParams: ['AuthorId','DebitedFunds','SecureMode','CardId','SecureModeReturnURL'],
-      defaultParams: {
-        SecureMode: 'DEFAULT',
-        SecureModeReturnURL: '???'
+      params: {
+          'AuthorId': { required: true }
+        , 'DebitedFunds': { required: true }
+        , 'SecureMode': { required: true, default: 'DEFAULT' }
+        , 'CardId': { required: true }
+        , 'SecureModeReturnURL': { required: true }
       }
     })
 

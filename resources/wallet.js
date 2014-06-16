@@ -13,37 +13,46 @@ module.exports = httpClient.extend({
     create: httpMethod({
       method: 'POST',
       path: '',
-      requiredParams: ['Owners','Description','Currency'],
-      defaultParams: {
-        Description: 'user wallet',
-        Currency: 'EUR'
+      params: {
+          'Owners': { required: true }
+        , 'Description': { required: true, default: 'wallet' }
+        , 'Currency': { required: true, default: 'EUR' }
       }
     }),
 
     transfer: httpMethod({
       method: 'POST',
       path: '../transfers',
-      requiredParams: ['AuthorId','DebitedFunds','Fees','DebitedWalletID','CreditedWalletID'],
-      defaultParams: {
-        Fees: { Currency: 'EUR', Amount: 0 }
+      params: {
+          'AuthorId': { required: true }
+        , 'DebitedFunds': { required: true }
+        , 'Fees': { required: true, default: { Currency: 'EUR', Amount: 0 } }
+        , 'DebitedWalletID': { required: true }
+        , 'CreditedWalletID': { required: true }
       }
     }),
 
     payin: httpMethod({
       method: 'POST',
       path: '../payins/card/direct',
-      requiredParams: ['AuthorId','CreditedUserId','DebitedFunds','Fees','CreditedWalletID','SecureModeReturnURL','CardId'],
-      defaultParams: {
-        Fees: { Currency: 'EUR', Amount: 0 },
-        SecureModeReturnURL: '',
-        SecureMode: 'DEFAULT'
+      params: {
+          'AuthorId': { required: true }
+        , 'CreditedUserId': { required: true }
+        , 'DebitedFunds': { required: true }
+        , 'Fees': { required: true, default: { Currency: 'EUR', Amount: 0 } }
+        , 'CreditedWalletID': { required: true }
+        , 'SecureModeReturnURL': { required: true }
+        , 'CardId': { required: true }
+        , 'SecureMode': { default: 'DEFAULT' }
       }
     }),
 
     transactions: httpMethod({
       method: 'GET',
       path: '{Id}/transactions',
-      requiredParams: ['Id']
+      params: {
+          'Id': { required: true }
+      }
     })
 
   }

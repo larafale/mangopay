@@ -16,19 +16,17 @@ module.exports = httpClient.extend({
 
   methods: {
 
-    create: httpMethod(
-      {
-        method: 'POST',
-        path: '',
-        requiredParams: ['UserId', 'Currency','CardNumber','CardExpirationDate','CardCvx'],
-        defaultParams: {
-          Currency: 'EUR',
-          CardNumber: '4970100000000154',
-          CardExpirationDate: '0216',
-          CardCvx: '123',
-        }
-      }, 
-      function(err, body, response, params, next){
+    create: httpMethod({
+      method: 'POST',
+      path: '',
+      params: {
+          'UserId': { required: true }
+        , 'Currency': { required: true, default: 'EUR' }
+        , 'CardNumber': { required: true, default: '4970100000000154' }
+        , 'CardExpirationDate': { required: true, default: '0216' }
+        , 'CardCvx': { required: true, default: '123' }
+      }
+    }, function(err, body, response, params, next){
         var self = this
 
         if(response.statusCode != 200)
@@ -98,7 +96,10 @@ module.exports = httpClient.extend({
     completeRegistration: httpMethod({
       method: 'POST',
       path: '{Id}',
-      requiredParams: ['Id','RegistrationData']
+      params: {
+          'Id': { required: true }
+        , 'RegistrationData': { required: true }
+      }
     })
 
   }
