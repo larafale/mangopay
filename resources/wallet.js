@@ -46,7 +46,7 @@ module.exports = httpClient.extend({
         , 'SecureMode': { default: 'DEFAULT' }
       }
     }),
-
+    
     transactions: httpMethod({
       method: 'GET',
       path: '{Id}/transactions',
