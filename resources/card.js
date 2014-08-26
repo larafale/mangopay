@@ -35,7 +35,7 @@ module.exports = httpClient.extend({
         // after obtaining a cardRegistration object
         // we send the card details to the PSP (payline) url
         var cardDetails = {
-          body: body.PreregistrationData,
+          data: body.PreregistrationData,
           accessKeyRef: body.AccessKey,
           cardNumber: params.CardNumber,
           cardExpirationDate: params.CardExpirationDate,
