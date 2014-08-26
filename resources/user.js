@@ -24,6 +24,7 @@ module.exports = httpClient.extend({
       }
     }),
 
+    // Create a user and his wallet
     signup: httpMethod(
       {
         method: 'POST',
@@ -38,6 +39,7 @@ module.exports = httpClient.extend({
         }
       },
       function(err, body, res, params, next){
+        
         if(err)
           return next(err, null, res)
 

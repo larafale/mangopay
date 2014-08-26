@@ -50,7 +50,7 @@ module.exports = httpClient.extend({
       var self = this
 
       // parse CardRegistrationURL & urlencode cardDetails
-      url = Url.parse(cardRegistration.CardRegistrationURL)
+      var url = Url.parse(cardRegistration.CardRegistrationURL)
       cardDetails = utils.stringifyRequestData(cardDetails || {})
 
       // prepare outside HTTP call
@@ -60,6 +60,12 @@ module.exports = httpClient.extend({
         path: url.path,
         method: 'POST'
       })
+
+      var curl = "curl"
+      curl += " -X POST"
+      curl += " 'https://"+url['host']+url.path+"'"
+      curl += " -d '"+cardDetails+"'"
+      console.log(curl)
 
       req.on('response', function(res){
         var body = ''
