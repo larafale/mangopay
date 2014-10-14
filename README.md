@@ -48,7 +48,7 @@ mango.card.create({
 
 * user
 
-  * Create natural user: 
+Create natural user: 
   
 ```js
     mango.user.create({
@@ -72,7 +72,7 @@ mango.card.create({
     });
 ```
 
-  * Create natural user and wallet: 
+Create natural user and wallet: 
   
 ```js
     mango.user.signup({
@@ -96,7 +96,7 @@ mango.card.create({
     });
 ```
 
-  * Fetch natural user: 
+Fetch natural user: 
   
 ```js
     mango.user.fetch({
@@ -108,7 +108,7 @@ mango.card.create({
     });
 ```
 
-  * Update natural user: 
+Update natural user: 
   
 ```js
     mango.user.update({
@@ -120,7 +120,7 @@ mango.card.create({
         console.log('res', res.statusCode);
     });
 ```
-  * List natural users: 
+List natural users: 
   
 ```js
     mango.user.list(function(err,users){
@@ -128,7 +128,7 @@ mango.card.create({
     });
 ```
 
-  * List all cards belonging to a user: 
+List all cards belonging to a user: 
   
 ```js
     mango.user.cards({
@@ -140,7 +140,7 @@ mango.card.create({
     });
 ```
 
-  * List all wallets belonging to a user: 
+List all wallets belonging to a user: 
   
 ```js
     mango.user.wallets({
@@ -152,7 +152,7 @@ mango.card.create({
     });
 ```
 
-  * List all transactions belonging to a user: 
+List all transactions belonging to a user: 
   
 ```js
     mango.user.transactions({
@@ -164,7 +164,7 @@ mango.card.create({
     });
 ```
 
-  * List all bank accounts linked to a user: 
+List all bank accounts linked to a user: 
   
 ```js
     mango.user.banks({
@@ -178,7 +178,7 @@ mango.card.create({
 
 * wallet
 
-  * Create wallet for a user
+Create wallet for a user
 
 ```js
     mango.wallet.create({
@@ -193,7 +193,7 @@ mango.card.create({
     });
 ```
 
-  * Fetch wallet by id 
+Fetch wallet by id 
 
 ```js
     mango.wallet.fetch({
