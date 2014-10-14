@@ -51,7 +51,7 @@ mango.card.create({
   * Create natural user: 
   
 ```js
-  mango.user.create({
+    mango.user.create({
       FirstName: "Victor", // Required
       LastName: "Hugo",    // Required
       Birthday: 1300186358,  // Required
@@ -69,14 +69,13 @@ mango.card.create({
         console.log('err', err);
         console.log('user', user);
         console.log('res', res.statusCode);
-
     });
 ```
 
   * Create natural user and wallet: 
   
 ```js
-  mango.user.signup({
+    mango.user.signup({
       FirstName: "Victor", // Required
       LastName: "Hugo",    // Required
       Birthday: 1300186358,  // Required
@@ -94,7 +93,6 @@ mango.card.create({
         console.log('err', err);
         console.log('wallet', wallet);
         console.log('res', res.statusCode);
-
     });
 ```
 
@@ -107,7 +105,6 @@ mango.card.create({
         console.log('err', err);
         console.log('user', user);
         console.log('res', res.statusCode);
-
     });
 ```
 
@@ -121,7 +118,6 @@ mango.card.create({
         console.log('err', err);
         console.log('user', user);
         console.log('res', res.statusCode);
-
     });
 ```
   * List natural users: 
@@ -141,7 +137,6 @@ mango.card.create({
         console.log('err', err);
         console.log('cards', cards);
         console.log('res', res.statusCode);
-
     });
 ```
 
@@ -154,7 +149,6 @@ mango.card.create({
         console.log('err', err);
         console.log('wallets', wallets);
         console.log('res', res.statusCode);
-
     });
 ```
 
@@ -167,7 +161,6 @@ mango.card.create({
         console.log('err', err);
         console.log('transactions', transactions);
         console.log('res', res.statusCode);
-
     });
 ```
 
@@ -180,22 +173,106 @@ mango.card.create({
         console.log('err', err);
         console.log('bankaccounts', bankaccounts);
         console.log('res', res.statusCode);
-
     });
 ```
 
+* wallet
+
+  * Create wallet for a user
+
+```js
+    mango.wallet.create({
+        Owners: ["1167492"], // Required
+        Description: "A very cool wallet", // Required, default: 'wallet'
+        Currency: "EUR", // Required, default: 'EUR'
+        Tag: "your custom tag"
+    }, function(err, wallet, res){
+        console.log('err', err);
+        console.log('wallet', wallet);
+        console.log('res', res.statusCode);
+    });
+```
+
+  * Fetch wallet by id 
+
+```js
+    mango.wallet.fetch({
+        Id: "1167492", // Required
+    }, function(err, wallet, res){
+        console.log('err', err);
+        console.log('wallet', wallet);
+        console.log('res', res.statusCode);
+    });
+```
+
+  * Transfer e-money from a wallet to another wallet
+
+```js
+    mango.wallet.transfer({
+        AuthorId : "1167495", // Required
+        DebitedFunds: {Currency : "EUR", Amount : 1000}, // Required
+        Fees : {Currency : "EUR", Amount : 100}, // Required, default 'EUR' and 0 
+        DebitedWalletID : "1167496", // Required (Where the funds are held before the transfer)
+        CreditedWalletID : "1167504", // Required (Where the funds will be held after the transfer)
+        CreditedUserId : "1167502",
+        Tag : "DefaultTag"
+    }, function(err, transfer, res){
+        console.log('err', err);
+        console.log('transfer', transfer);
+        console.log('res', res.statusCode);
+    });
+```
+
+For a complete list of available parameters check [http://docs.mangopay.com/api-references/transfers/](http://docs.mangopay.com/api-references/transfers/)
+
+
+  * Pay directly with a registered card
+
+```js
+    mango.wallet.payin({
+      AuthorId: "1167492",        // Required
+      CreditedUserId : "1167502", // Required
+      DebitedFunds: {             // Required
+            Currency: "EUR",
+            Amount: 10000
+      },
+      Fees: {               // Required
+            Currency: "EUR",
+            Amount: 100
+      },
+      CreditedWalletId: "1167810",  // Required
+      CardId: "1262419",            // Required
+      SecureMode:"DEFAULT",
+      SecureModeReturnURL:"https://www.mysite.com",
+      Tag: "payin" // Required
+
+    }, function(err, payin, res){
+        console.log('err', err);
+        console.log('payin', payin);
+        console.log('res', res.statusCode);
+    });
+```
+
+
+  * Fetch transaction: 
+  
+```js
+    mango.wallet.transaction({
+      Id: "123456789", // Required
+    }, function(err, transaction, res){
+        console.log('err', err);
+        console.log('transaction', transcation);
+        console.log('res', res.statusCode);
+    });
+```
+
+
 * bank
+
   * `create(params)`
   * `fetch(params)`
   * `wire(params)`
   * `fetchWire(params)`
-
-* wallet
-  * `create(params)`
-  * `fetch(params)`
-  * `transfer(params)`
-  * `payin(params)`
-  * `tansactions(params)`
 
 * card
   * `create(params)`
