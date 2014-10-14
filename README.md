@@ -205,7 +205,7 @@ Fetch wallet by id
     });
 ```
 
-  * Transfer e-money from a wallet to another wallet
+Transfer e-money from a wallet to another wallet
 
 ```js
     mango.wallet.transfer({
@@ -226,7 +226,7 @@ Fetch wallet by id
 For a complete list of available parameters check [http://docs.mangopay.com/api-references/transfers/](http://docs.mangopay.com/api-references/transfers/)
 
 
-  * Pay directly with a registered card
+Pay directly with a registered card
 
 ```js
     mango.wallet.payin({
@@ -254,7 +254,7 @@ For a complete list of available parameters check [http://docs.mangopay.com/api-
 ```
 
 
-  * Fetch transaction: 
+Fetch transaction: 
   
 ```js
     mango.wallet.transaction({
