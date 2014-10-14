@@ -47,13 +47,142 @@ mango.card.create({
 *Where you see `params` it is a plain JavaScript object, e.g. `{ Email: 'foo@example.com' }`*
 
 * user
-  * `create(params)`
-  * `fetch(params)`
-  * `list()`
-  * `cards(params)`
-  * `wallets(params)`
-  * `tansactions(params)`
-  * `banks(params)`
+
+  * Create natural user: 
+  
+```js
+  mango.user.create({
+      FirstName: "Victor", // Required
+      LastName: "Hugo",    // Required
+      Birthday: 1300186358,  // Required
+      Nationality: "FR", // Required, default: 'FR'
+      CountryOfResidence: "FR", // Required, default: 'FR'
+      Address: "1 rue des Misérables, Paris",
+      Occupation: "Writer", 
+      IncomeRange: "6", 
+      ProofOfIdentity: null,
+      ProofOfAddress: null, 
+      PersonType: "NATURAL", 
+      Email: "victor@hugo.com", 
+      Tag: "custom tag",
+    }, function(err, user, res){
+        console.log('err', err);
+        console.log('user', user);
+        console.log('res', res.statusCode);
+
+    });
+```
+
+  * Create natural user and wallet: 
+  
+```js
+  mango.user.signup({
+      FirstName: "Victor", // Required
+      LastName: "Hugo",    // Required
+      Birthday: 1300186358,  // Required
+      Nationality: "FR", // Required, default: 'FR'
+      CountryOfResidence: "FR", // Required, default: 'FR'
+      Address: "1 rue des Misérables, Paris",
+      Occupation: "Writer", 
+      IncomeRange: "6", 
+      ProofOfIdentity: null,
+      ProofOfAddress: null, 
+      PersonType: "NATURAL", 
+      Email: "victor@hugo.com", 
+      Tag: "custom tag",
+    }, function(err, wallet, res){
+        console.log('err', err);
+        console.log('wallet', wallet);
+        console.log('res', res.statusCode);
+
+    });
+```
+
+  * Fetch natural user: 
+  
+```js
+    mango.user.fetch({
+      Id: "123456789", // Required
+    }, function(err, user, res){
+        console.log('err', err);
+        console.log('user', user);
+        console.log('res', res.statusCode);
+
+    });
+```
+
+  * Update natural user: 
+  
+```js
+    mango.user.update({
+      Id: "123456789", // Required
+      // all the fields to be updated
+    }, function(err, user, res){
+        console.log('err', err);
+        console.log('user', user);
+        console.log('res', res.statusCode);
+
+    });
+```
+  * List natural users: 
+  
+```js
+    mango.user.list(function(err,users){
+        console.log(users); 
+    });
+```
+
+  * List all cards belonging to a user: 
+  
+```js
+    mango.user.cards({
+      UserId: "123456789", // Required
+    }, function(err, cards, res){
+        console.log('err', err);
+        console.log('cards', cards);
+        console.log('res', res.statusCode);
+
+    });
+```
+
+  * List all wallets belonging to a user: 
+  
+```js
+    mango.user.wallets({
+      UserId: "123456789", // Required
+    }, function(err, wallets, res){
+        console.log('err', err);
+        console.log('wallets', wallets);
+        console.log('res', res.statusCode);
+
+    });
+```
+
+  * List all transactions belonging to a user: 
+  
+```js
+    mango.user.transactions({
+      UserId: "123456789", // Required
+    }, function(err, transactions, res){
+        console.log('err', err);
+        console.log('transactions', transactions);
+        console.log('res', res.statusCode);
+
+    });
+```
+
+  * List all bank accounts linked to a user: 
+  
+```js
+    mango.user.banks({
+      UserId: "123456789", // Required
+    }, function(err, bankaccounts, res){
+        console.log('err', err);
+        console.log('bankaccounts', bankaccounts);
+        console.log('res', res.statusCode);
+
+    });
+```
 
 * bank
   * `create(params)`
