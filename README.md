@@ -120,6 +120,7 @@ Update natural user:
         console.log('res', res.statusCode);
     });
 ```
+
 List natural users: 
   
 ```js
@@ -178,7 +179,7 @@ List all bank accounts linked to a user:
 
 * wallet
 
-Create wallet for a user
+Create wallet for a user:
 
 ```js
     mango.wallet.create({
@@ -193,7 +194,7 @@ Create wallet for a user
     });
 ```
 
-Fetch wallet by id 
+Fetch wallet by id:
 
 ```js
     mango.wallet.fetch({
@@ -205,7 +206,7 @@ Fetch wallet by id
     });
 ```
 
-Transfer e-money from a wallet to another wallet
+Transfer e-money from a wallet to another wallet:
 
 ```js
     mango.wallet.transfer({
@@ -226,12 +227,12 @@ Transfer e-money from a wallet to another wallet
 For a complete list of available parameters check [http://docs.mangopay.com/api-references/transfers/](http://docs.mangopay.com/api-references/transfers/)
 
 
-Pay directly with a registered card
+Pay directly with a registered card:
 
 ```js
     mango.wallet.payin({
-      AuthorId: "1167492",        // Required
-      CreditedUserId : "1167502", // Required
+      AuthorId: "1167492",        // Required (The user ID of the Payin transaction’s author)
+      CreditedUserId : "1167502", // Required (The ID of the owner of the credited wallet)
       DebitedFunds: {             // Required
             Currency: "EUR",
             Amount: 10000
@@ -240,7 +241,7 @@ Pay directly with a registered card
             Currency: "EUR",
             Amount: 100
       },
-      CreditedWalletId: "1167810",  // Required
+      CreditedWalletID: "1167810",  // Required (The ID of the credited wallet)
       CardId: "1262419",            // Required
       SecureMode:"DEFAULT",
       SecureModeReturnURL:"https://www.mysite.com",
@@ -254,7 +255,7 @@ Pay directly with a registered card
 ```
 
 
-Fetch transaction: 
+Fetch all transactions for a given wallet: 
   
 ```js
     mango.wallet.transaction({
@@ -266,16 +267,115 @@ Fetch transaction:
     });
 ```
 
+* card
+
+Register a card:
+
+```js
+    mango.card.create({ 
+      UserId: '2565355',
+      CardNumber: '4970100000000154',
+      CardExpirationDate: '0216',
+      CardCvx: '123',
+    }, function(err, card, res){
+      err;	
+      card; // mango card object 
+      res; // raw 'http' response object => res.statusCode === 200
+    })
+```
+
+Fetch a registered card:
+
+```js
+    mango.card.fetch({ 
+      Id: '2565355', // Required
+    }, function(err, card, res){
+        console.log('err', err);
+        console.log('card', card);
+        console.log('res', res.statusCode);
+    })
+```
+
+Update a registered card: 
+
+The only editable parameter is `Active`, that can be switched from true to false and this action is irreversible.
+  
+```js
+    mango.card.update({
+      Id: "2565355", // Required
+    }, function(err, card, res){
+        console.log('err', err);
+        console.log('card', card);
+        console.log('res', res.statusCode);
+    });
+```
 
 * bank
 
-  * `create(params)`
-  * `fetch(params)`
-  * `wire(params)`
-  * `fetchWire(params)`
+Register a bank account for a user:
 
-* card
-  * `create(params)`
+```js
+    mango.bank.create({ 
+        OwnerName: "Victor Hugo",           // Required
+        UserId: "1345678",                  // Required
+        Type: "IBAN",                       // Required, Default: 'IBAN'
+        OwnerAddress: "1 rue des Misérables", // Required
+        IBAN: "FR3020041010124530725S03383", // Required
+        BIC: "CRLYFRPP"                     // Required
+    }, function(err, bankaccount, res){
+        console.log('err', err);
+        console.log('bankaccount', bankaccount);
+        console.log('res', res.statusCode);
+    })
+```
+
+Get a bank account:
+
+```js
+    mango.bank.fetch({ 
+      UserId: '2565355', // Required
+      BankId: '1234566', // Required
+    }, function(err, bankaccount, res){
+        console.log('err', err);
+        console.log('bankaccount', bankaccount);
+        console.log('res', res.statusCode);
+    })
+```
+
+Withdraw money from a wallet to a bank account:
+
+```js
+    mango.bank.wire({ 
+        AuthorId:"12567875",        // Required
+        DebitedWalletId:"12449234", // Required
+        DebitedFunds:{              // Required
+            Currency:"EUR",
+            Amount:"1000"
+        },
+        Fees:{                      // Required, Default: 'EUR', 0
+            Currency:"EUR",
+            Amount:"100"
+        },
+        BankAccountId:"12449209",  // Required
+        BIC: "CRLYFRPP"            // Required
+    }, function(err, wire, res){
+        console.log('err', err);
+        console.log('wire', wire);
+        console.log('res', res.statusCode);
+    })
+```
+
+Get wire:
+
+```js
+    mango.bank.fetchWire({ 
+      Id: '2565355', // Required
+    }, function(err, wire, res){
+        console.log('err', err);
+        console.log('wire', wire);
+        console.log('res', res.statusCode);
+    })
+```
 
 * author
   * `create(params)`
