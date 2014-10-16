@@ -108,6 +108,23 @@ module.exports = httpClient.extend({
       }
     })
 
-  }
+  },
+
+  fetch: httpMethod({
+      method: 'GET',
+      path: '../cards/{Id}',
+      params: {
+          'Id': { required: true }    
+      }
+  }),
+
+  update: httpMethod({
+      method: 'PUT',
+      path: '../cards/{Id}',
+      params: {
+          'Id': { required: true }    
+      }
+  })
+
 
 })
