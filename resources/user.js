@@ -59,6 +59,28 @@ module.exports = httpClient.extend({
       params: { 'Id': { required: true } }
     }),
 
+    // Legal User
+    createLegal: httpMethod({
+      method: 'POST',
+      path: 'legal',
+      params: {
+          'Email': { required: true }
+        , 'Name': { required: true }
+        , 'LegalPersonType': { required: true }
+        , 'LegalRepresentativeFirstName': { required: true }
+        , 'LegalRepresentativeLastName': { required: true }
+        , 'LegalRepresentativeBirthday': { required: true }
+        , 'LegalRepresentativeNationality': { required: true, default: 'FR' }
+        , 'LegalRepresentativeCountryOfResidence': { required: true, default: 'FR' }
+      }
+    }),
+
+    fetchLegal: httpMethod({
+      method: 'GET',
+      path: 'legal/{Id}',
+      params: { 'Id': { required: true } }
+    }),
+
     cards: httpMethod({
       method: 'GET',
       path: '{UserId}/cards',

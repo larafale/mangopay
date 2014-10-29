@@ -34,8 +34,33 @@ describe('Mango wrapper', function(){
     }, done)
 
   })
+  
+  it('create a legal user', function(done){
+    this.timeout(5000)
 
-  it.only('list users', function(done){
+    mango.user.createLegal({ 
+        Name: "mycompany.com"
+      , Email: "info@mycompany.com"
+      , LegalPersonType: "BUSINESS"
+      , LegalRepresentativeFirstName: "John"
+      , LegalRepresentativeLastName: "Doe"
+      , LegalRepresentativeEmail: "john_doe@mycompany.es"
+      , HeadquartersAddress: "Canal Street, Madrid, Spain"
+      , LegalRepresentativeAdress: "Canal Street, Madrid, Spain"
+      , LegalRepresentativeBirthday: moment('300681', 'DDMMYY').unix()
+      , LegalRepresentativeCountryOfResidence: "ES"
+      , LegalRepresentativeNationality: "ES"
+
+    }, function(err, legalUser, res) {
+      mango.user.fetchLegal({Id: legalUser.Id}, function(err, body, res){
+        console.log("Fetch legal User", body)
+        done(err)
+      })
+    })
+
+  })
+
+  it('list users', function(done){
     mango.user.list(function(err, body, res){
       console.log(body)
       done(err)
