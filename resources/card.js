@@ -16,6 +16,15 @@ module.exports = httpClient.extend({
 
   methods: {
 
+    initRegistration: httpMethod({
+      method: 'POST',
+      path: '',
+      params: {
+          'UserId': { required: true }
+        , 'Currency': { required: true, default: 'EUR' }
+      }
+    }),
+
     create: httpMethod({
       method: 'POST',
       path: '',
