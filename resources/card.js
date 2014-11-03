@@ -65,7 +65,7 @@ module.exports = httpClient.extend({
       curl += " -X POST"
       curl += " 'https://"+url['host']+url.path+"'"
       curl += " -d '"+cardDetails+"'"
-      console.log(curl)
+      //console.log(curl)
 
       req.on('response', function(res){
         var body = ''
