@@ -7,6 +7,7 @@ var assert = require('chai').assert
       username: Creds.username,
       password: Creds.password
     })
+  , fs = require('fs')
 
 describe('Mango wrapper', function(){
 
@@ -39,32 +40,103 @@ describe('Mango wrapper', function(){
     this.timeout(5000)
 
     mango.user.createLegal({ 
-        Name: "mycompany.com"
-      , Email: "info@mycompany.com"
-      , LegalPersonType: "BUSINESS"
-      , LegalRepresentativeFirstName: "John"
-      , LegalRepresentativeLastName: "Doe"
-      , LegalRepresentativeEmail: "john_doe@mycompany.es"
-      , HeadquartersAddress: "Canal Street, Madrid, Spain"
-      , LegalRepresentativeAdress: "Canal Street, Madrid, Spain"
+        Name: 'mycompany.com'
+      , Email: 'info@mycompany.com'
+      , LegalPersonType: 'BUSINESS'
+      , LegalRepresentativeFirstName: 'John'
+      , LegalRepresentativeLastName: 'Doe'
+      , LegalRepresentativeEmail: 'john_doe@mycompany.es'
+      , HeadquartersAddress: 'Canal Street, Madrid, Spain'
+      , LegalRepresentativeAdress: 'Canal Street, Madrid, Spain'
       , LegalRepresentativeBirthday: moment('300681', 'DDMMYY').unix()
-      , LegalRepresentativeCountryOfResidence: "ES"
-      , LegalRepresentativeNationality: "ES"
+      , LegalRepresentativeCountryOfResidence: 'ES'
+      , LegalRepresentativeNationality: 'ES'
 
     }, function(err, legalUser, res) {
-      mango.user.fetchLegal({Id: legalUser.Id}, function(err, body, res){
-        console.log("Fetch legal User", body)
+      mango.user.fetchLegal({Id: legalUser.Id}, function(err, user, res){
+        assert.equal(user.Name, 'mycompany.com')
         done(err)
       })
     })
 
   })
 
-  it('list users', function(done){
-    mango.user.list(function(err, body, res){
-      console.log(body)
-      done(err)
+  // it('list users', function(done){
+  //   mango.user.list(function(err, body, res){
+  //     console.log(body)
+  //     done(err)
+  //   })
+  // })
+
+  it('create a document', function(done){
+    this.timeout(5000)
+
+    mango.user.list(function(err, users, res){
+      user = users[0]
+         
+      fs.readFile('test/file.jpg', function(err, data){        
+        var base64File = new Buffer(data, 'binary').toString('base64');
+
+        mango.document.create({ 
+            UserId: user.Id
+          , Type: 'IDENTITY_PROOF'
+          , File: base64File
+        }, function(createdDoc) {
+
+          mango.document.fetch({ 
+              UserId: user.Id
+            , Id: createdDoc.Id
+          }, function(err, doc) {
+            assert.equal(doc.Id, createdDoc.Id)
+            done(err)
+          })
+        })
+      })
+    })  
+  })
+
+  it('update a document', function(done){
+    this.timeout(5000)
+
+    mango.user.list(function(err, users, res){
+      user = users[0]
+         
+      fs.readFile('test/file.jpg', function(err, data){        
+        var base64File = new Buffer(data, 'binary').toString('base64');
+
+        mango.document.create({ 
+            UserId: user.Id
+          , Type: 'IDENTITY_PROOF'
+          , File: base64File
+        }, function(createdDoc) {
+
+          mango.document.update({ 
+              UserId: user.Id
+            , Id: createdDoc.Id
+            , Status: "VALIDATION_ASKED"
+          }, function(err, doc) {
+            assert.equal(doc.Status, "VALIDATION_ASKED")
+            done(err)
+          })
+        })
+      })
+    })  
+  })
+
+  it('init Registration card process', function(done){
+    this.timeout(5000)
+
+    mango.user.list(function(err, users, res){
+      user = users[0]
+
+      mango.card.initRegistration({ 
+          UserId: user.Id
+        , Currency: "EUR"
+      }, function(err, cardRegistration) {
+        expect(cardRegistration.AccessKey).not.to.be.null
+        done(err)
+      })
+
     })
   })
-  
 })

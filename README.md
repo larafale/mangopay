@@ -129,6 +129,40 @@ List natural users:
     });
 ```
 
+Create legal user: 
+  
+```js
+    mango.user.createLegal({
+      Name: 'mycompany.com', 
+      Email: 'info@mycompany.com',
+      LegalPersonType: 'BUSINESS',
+      LegalRepresentativeFirstName: 'John',
+      LegalRepresentativeLastName: 'Doe',
+      LegalRepresentativeEmail: 'john_doe@mycompany.es',
+      HeadquartersAddress: 'Canal Street, Madrid, Spain',
+      LegalRepresentativeAdress: 'Canal Street, Madrid, Spain',
+      LegalRepresentativeBirthday: moment('300681', 'DDMMYY').unix(),
+      LegalRepresentativeCountryOfResidence: 'ES',
+      LegalRepresentativeNationality: 'ES',
+    }, function(err, user, res){
+        console.log('err', err);
+        console.log('user', user);
+        console.log('res', res.statusCode);
+    });
+```
+
+Fetch legal user: 
+  
+```js
+    mango.user.fetchLegal({
+      Id: "123456789", // Required
+    }, function(err, user, res){
+        console.log('err', err);
+        console.log('user', user);
+        console.log('res', res.statusCode);
+    });
+```
+
 List all cards belonging to a user: 
   
 ```js
@@ -284,6 +318,19 @@ Register a card:
     })
 ```
 
+Init two-step card registration process:
+
+```js
+    mango.card.initRegistration({ 
+      UserId: '2565355',
+      Currency: "EUR"
+    }, function(err, registration, res){
+      err;  
+      registration; // mango registration object 
+      res; // raw 'http' response object => res.statusCode === 200
+    })
+```
+
 Fetch a registered card:
 
 ```js
@@ -382,6 +429,9 @@ Get wire:
 
 * document
   * `create(params)`
+  * `createPage(params)`
+  * `fetch(params)`
+  * `update(params)`
   
  
 ### Test
