@@ -47,6 +47,17 @@ module.exports = httpClient.extend({
       }
     }),
     
+    refundPayin: httpMethod({
+      method: 'POST',
+      path: '../payins/{PayinId}/refunds',
+      params: {
+          'PayinId': { required: true }
+        , 'AuthorId': { required: true }
+        , 'DebitedFunds': { required: false }
+        , 'Fees': { required: false }
+      }
+    }), 
+    
     transactions: httpMethod({
       method: 'GET',
       path: '{Id}/transactions',
