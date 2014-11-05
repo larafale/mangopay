@@ -43,6 +43,12 @@ module.exports = httpClient.extend({
       method: 'GET',
       path: '{UserId}/KYC/documents/{Id}',
       requiredParams: ['UserId','Id'],
+    }),
+
+    update: httpMethod({
+      method: 'PUT',
+      path: '{UserId}/KYC/documents/{Id}',
+      requiredParams: ['UserId','Id'],
     })
 
   }
