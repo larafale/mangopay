@@ -122,4 +122,21 @@ describe('Mango wrapper', function(){
       })
     })  
   })
+
+  it('init Registration card process', function(done){
+    this.timeout(5000)
+
+    mango.user.list(function(err, users, res){
+      user = users[0]
+
+      mango.card.initRegistration({ 
+          UserId: user.Id
+        , Currency: "EUR"
+      }, function(err, cardRegistration) {
+        expect(cardRegistration.AccessKey).not.to.be.null
+        done(err)
+      })
+
+    })
+  })
 })
