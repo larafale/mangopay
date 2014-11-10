@@ -41,7 +41,6 @@ module.exports = httpClient.extend({
         , 'DebitedFunds': { required: true }
         , 'Fees': { required: true, default: { Currency: 'EUR', Amount: 0 } }
         , 'BankAccountId': { required: true }
-        , 'BIC': { required: true }
       }
     }),
 
