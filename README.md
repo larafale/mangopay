@@ -260,35 +260,6 @@ Transfer e-money from a wallet to another wallet:
 
 For a complete list of available parameters check [http://docs.mangopay.com/api-references/transfers/](http://docs.mangopay.com/api-references/transfers/)
 
-
-Pay directly with a registered card:
-
-```js
-    mango.wallet.payin({
-      AuthorId: "1167492",        // Required (The user ID of the Payin transaction’s author)
-      CreditedUserId : "1167502", // Required (The ID of the owner of the credited wallet)
-      DebitedFunds: {             // Required
-            Currency: "EUR",
-            Amount: 10000
-      },
-      Fees: {               // Required
-            Currency: "EUR",
-            Amount: 100
-      },
-      CreditedWalletID: "1167810",  // Required (The ID of the credited wallet)
-      CardId: "1262419",            // Required
-      SecureMode:"DEFAULT",
-      SecureModeReturnURL:"https://www.mysite.com",
-      Tag: "payin" // Required
-
-    }, function(err, payin, res){
-        console.log('err', err);
-        console.log('payin', payin);
-        console.log('res', res.statusCode);
-    });
-```
-
-
 Fetch all transactions for a given wallet: 
   
 ```js
@@ -433,7 +404,125 @@ Get wire:
   * `fetch(params)`
   * `update(params)`
   
- 
+* payin
+
+Create a direct payin by tokenized card:
+
+```js
+    mango.payin.createByToken({         
+        AuthorId: "1167492",        // Required (The user ID of the Payin transaction’s author)
+        CreditedUserId : "1167502", // Required (The ID of the owner of the credited wallet)
+        DebitedFunds: {             // Required
+              Currency: "EUR",
+              Amount: 10000
+        },
+        Fees: {               // Required
+              Currency: "EUR",
+              Amount: 100
+        },
+        CreditedWalletID: "1167810",  // Required (The ID of the credited wallet)
+        CardId: "1262419",            // Required
+        SecureMode:"DEFAULT",
+        SecureModeReturnURL:"https://www.mysite.com",
+        Tag: "payin" // Required
+
+    }, function(err, payin, res){
+        console.log('err', err);
+        console.log('payin', payin);
+        console.log('res', res.statusCode);
+    })
+```
+
+Fetch payin:
+
+```js
+    mango.payin.fetch({         
+        Id: "1122477",        // Required (The ID of the Payin)        
+    }, function(err, payin, res){
+        console.log('err', err);
+        console.log('payin', payin);
+        console.log('res', res.statusCode);
+    })
+```
+
+Create refund:
+
+```js
+    mango.payin.createRefund({         
+        Id: "1122477",        // Required (The ID of the Payin)  
+        AuthorId: "1167492",  // Required (The user ID of the Payin transaction’s author)    
+    }, function(err, refund, res){
+        console.log('err', err);
+        console.log('refund', refund);
+        console.log('res', res.statusCode);
+    })
+``` 
+
+Fetch refund:
+
+```js
+    mango.payin.fetchRefund({         
+        Id: "1348477",        // Required (The ID of the Refund)  
+    }, function(err, refund, res){
+        console.log('err', err);
+        console.log('refund', refund);
+        console.log('res', res.statusCode);
+    })
+``` 
+
+* hook
+
+Create a hook:
+
+```js
+    mango.hook.create({         
+        Url: "https://my_notifications_end_point.com", // Required 
+        EventType: "PAYIN_NORMAL_SUCCEDED",  // Required
+        Tag: "hook"
+
+    }, function(err, hook, res){
+        console.log('err', err);
+        console.log('hook', hook);
+        console.log('res', res.statusCode);
+    })
+```
+
+List all hooks:
+
+```js
+    mango.hook.list(function(err, hooks, res){
+        console.log('err', err);
+        console.log('hooks', hooks);
+        console.log('res', res.statusCode);
+    })
+```
+
+Fetch hook:
+
+```js
+    mango.hook.fetch({         
+        Id: "12345678"
+    }, function(err, hook, res){
+        console.log('err', err);
+        console.log('hook', hook);
+        console.log('res', res.statusCode);
+    })
+```
+
+update hook:
+
+```js
+    mango.hook.update({         
+        Id: "12345678",
+        Status: "DISABLED"
+    }, function(err, hook, res){
+        console.log('err', err);
+        console.log('hook', hook);
+        console.log('res', res.statusCode);
+    })
+```
+
+
 ### Test
 
 `npm test`  
