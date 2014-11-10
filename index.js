@@ -20,7 +20,7 @@ function Mango(options){
   if(this._options.production)
     this._api.host = 'api.mangopay.com'
 
-  this.mount(this._options.mount || 'user|card|wallet|author|bank|document')
+  this.mount(this._options.mount || 'user|card|wallet|author|bank|document|payin|hook')
   this.setAuth(options)
 }
 

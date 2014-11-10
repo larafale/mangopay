@@ -1,0 +1,57 @@
+
+var httpClient = require('../lib/httpClient')
+  , httpMethod = require('../lib/httpMethod')
+
+module.exports = httpClient.extend({
+  
+  path: 'payins',
+  
+  includeBasic: [],
+
+  methods: {
+
+    createByToken: httpMethod({
+      method: 'POST',
+      path: '/card/direct',
+      params: {
+          'AuthorId': { required: true }
+        , 'CreditedUserId': { required: true }
+        , 'DebitedFunds': { required: true }
+        , 'Fees': { required: true, default: { Currency: 'EUR', Amount: 0 } }
+        , 'CreditedWalletID': { required: true }
+        , 'SecureModeReturnURL': { required: true }
+        , 'CardId': { required: true }
+        , 'SecureMode': { default: 'DEFAULT' }
+      }
+    }),
+
+    fetch: httpMethod({
+      method: 'GET',
+      path: '/{Id}',
+      params: {
+        'Id': { required: true }
+      }
+    }), 
+    
+    createRefund: httpMethod({
+      method: 'POST',
+      path: '/{Id}/refunds',
+      params: {
+          'Id': { required: true }
+        , 'AuthorId': { required: true }
+        , 'DebitedFunds': { required: false }
+        , 'Fees': { required: false }
+      }
+    }),        
+
+    fetchRefund: httpMethod({
+      method: 'GET',
+      path: '../refunds/{Id}',
+      params: {
+          'Id': { required: true }
+      }
+    })    
+    
+  }
+
+})
