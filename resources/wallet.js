@@ -30,34 +30,8 @@ module.exports = httpClient.extend({
         , 'DebitedWalletID': { required: true }
         , 'CreditedWalletID': { required: true }
       }
-    }),
-
-    payin: httpMethod({
-      method: 'POST',
-      path: '../payins/card/direct',
-      params: {
-          'AuthorId': { required: true }
-        , 'CreditedUserId': { required: true }
-        , 'DebitedFunds': { required: true }
-        , 'Fees': { required: true, default: { Currency: 'EUR', Amount: 0 } }
-        , 'CreditedWalletID': { required: true }
-        , 'SecureModeReturnURL': { required: true }
-        , 'CardId': { required: true }
-        , 'SecureMode': { default: 'DEFAULT' }
-      }
-    }),
-    
-    refundPayin: httpMethod({
-      method: 'POST',
-      path: '../payins/{PayinId}/refunds',
-      params: {
-          'PayinId': { required: true }
-        , 'AuthorId': { required: true }
-        , 'DebitedFunds': { required: false }
-        , 'Fees': { required: false }
-      }
-    }), 
-    
+    }),   
+        
     transactions: httpMethod({
       method: 'GET',
       path: '{Id}/transactions',
