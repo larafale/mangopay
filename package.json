@@ -1,6 +1,6 @@
 {
   "name": "mangopay",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Mango API wrapper",
   "homepage": "https://github.com/larafale/mangopay",
   "author": "Louis Grellet @Larafale <as1cron@gmail.com>",
@@ -13,8 +13,9 @@
     "node": "0.10.x"
   },
   "devDependencies": {
+    "chai": "~1.9.1",
     "mocha": "~1.20.1",
-    "chai": "~1.9.1"
+    "moment": "^2.8.3"
   },
   "dependencies": {
     "when": "~3.1.0"
