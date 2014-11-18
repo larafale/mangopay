@@ -25,27 +25,20 @@ module.exports = httpClient.extend({
     }),
 
     // Create a user and his wallet
-    signup: httpMethod(
-      {
-        method: 'POST',
-        path: 'natural',
-        params:{
-            'Email': { required: true }
-          , 'FirstName': { required: true }
-          , 'LastName': { required: true }
-          , 'Birthday': { required: true }
-          , 'Nationality': { required: true, default: 'FR' }
-          , 'CountryOfResidence': { required: true, default: 'FR' }
-        }
-      },
-      function(err, body, res, params, next){
-        
-        if(err)
-          return next(err, null, res)
+    signup: function(user, callback){
+      var self = this
 
-        this._root.wallet.create({ Owners: [body.Id] }, next)
+      var createWallet = function(err, user){
+        if(err) return callback(err)
+
+        self._root.wallet.create({ Owners: [user.Id] }, function(err, wallet){
+          // return user & wallet
+          callback(err, user, wallet)
+        })
       }
-    ),
+
+      this.create(user, createWallet)
+    },
 
     fetch: httpMethod({
       method: 'GET',

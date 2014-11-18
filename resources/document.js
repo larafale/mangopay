@@ -9,6 +9,9 @@ module.exports = httpClient.extend({
   
   methods: {
 
+    // Notice that this method return the document as 
+    // the first arg of the callback. There are no err arg.
+    // Gotta check why ?
     create: httpMethod(
       {
         method: 'POST',
