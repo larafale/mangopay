@@ -18,7 +18,7 @@ module.exports = httpClient.extend({
         , 'CreditedUserId': { required: true }
         , 'DebitedFunds': { required: true }
         , 'Fees': { required: true, default: { Currency: 'EUR', Amount: 0 } }
-        , 'CreditedWalletID': { required: true }
+        , 'CreditedWalletId': { required: true }        
         , 'SecureModeReturnURL': { required: true }
         , 'CardId': { required: true }
         , 'SecureMode': { default: 'DEFAULT' }
