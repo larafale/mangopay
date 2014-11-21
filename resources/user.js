@@ -74,6 +74,12 @@ module.exports = httpClient.extend({
       params: { 'Id': { required: true } }
     }),
 
+    updateLegal: httpMethod({
+      method: 'PUT',
+      path: 'legal/{Id}',
+      params: { 'Id': { required: true } }
+    }),
+
     cards: httpMethod({
       method: 'GET',
       path: '{UserId}/cards',
