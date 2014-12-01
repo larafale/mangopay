@@ -4,10 +4,12 @@ var assert = require('chai').assert
   , fs = require('fs')
 
 var Creds = require('./__credentials.json')
+  , utils = require('../lib/utils')
   , Mango = require('../index')
   , mango = Mango({
       username: Creds.username,
-      password: Creds.password
+      password: Creds.password,
+      debug: false
     })
 
 describe('Mango wrapper', function(){
@@ -19,6 +21,15 @@ describe('Mango wrapper', function(){
   it('use sandbox as default', function(){
     assert.equal(mango._api.host, 'api.sandbox.mangopay.com')
     assert.equal(mango._api.protocol, 'https')
+  })
+
+})
+
+describe('Utils', function(){
+
+  it('stringifyRequestData', function(){
+    assert.equal(utils.stringifyRequestData('a=b'), 'a=b')
+    assert.equal(utils.stringifyRequestData({ a: 'b' }), 'a=b')
   })
 
 })
