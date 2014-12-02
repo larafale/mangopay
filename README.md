@@ -42,6 +42,27 @@ mango.card.create({
 })
 ```
 
+Methods that list items (cards, transactions, users, etc...) can paginate, filter and sort fields using a special `$query` parameter:
+
+```js
+mango.user.transactions({
+  UserId: "123456789",
+  $query:{
+    Sort:"LastName:asc",
+    page:1,
+    per_page:100
+  }
+},
+function(err, transactions, res){
+  console.log('err', err);
+  console.log('transactions', transactions);
+  console.log('res', res.statusCode);
+});
+```
+or alternatively you can pass a String: `$query: "Sort=LastName:asc&page=1&per_page=100"`
+
+More information on the specific [documentation page](https://docs.mangopay.com/api-references/sort-lists/)
+
 ### Available resources & methods
 
 *Where you see `params` it is a plain JavaScript object, e.g. `{ Email: 'foo@example.com' }`*
