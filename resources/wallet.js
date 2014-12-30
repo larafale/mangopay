@@ -30,7 +30,15 @@ module.exports = httpClient.extend({
         , 'DebitedWalletID': { required: true }
         , 'CreditedWalletID': { required: true }
       }
-    }),   
+    }),
+
+    fetchTransfer: httpMethod({
+      method: 'GET',
+      path: '../transfers/{Id}',
+      params: {
+        'Id': { required: true }
+      }
+    }),
         
     transactions: httpMethod({
       method: 'GET',
