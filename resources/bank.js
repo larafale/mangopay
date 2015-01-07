@@ -19,7 +19,6 @@ module.exports = httpClient.extend({
         , 'Type': { required: true, default: 'IBAN' }
         , 'OwnerAddress': { required: true }
         , 'IBAN': { required: true }
-        , 'BIC': { required: true }
       }
     }),
 
