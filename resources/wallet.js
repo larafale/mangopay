@@ -6,7 +6,7 @@ module.exports = httpClient.extend({
   
   path: 'wallets',
   
-  includeBasic: [ 'fetch' ],
+  includeBasic: [ 'fetch', 'update' ],
 
   methods: {
 
