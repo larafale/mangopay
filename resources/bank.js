@@ -15,10 +15,8 @@ module.exports = httpClient.extend({
       path: '{UserId}/bankaccounts/{Type}',
       params: {
           'OwnerName': { required: true }
-        , 'UserId': { required: true }
         , 'Type': { required: true, default: 'IBAN' }
         , 'OwnerAddress': { required: true }
-        , 'IBAN': { required: true }
       }
     }),
 
