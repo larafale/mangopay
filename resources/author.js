@@ -6,7 +6,7 @@ module.exports = httpClient.extend({
   
   path: 'preauthorizations',
   
-  includeBasic: [ ],
+  includeBasic: ['fetch', 'update'],
 
   methods: {
 
