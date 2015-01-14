@@ -1,6 +1,6 @@
 {
   "name": "mangopay",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Mango API wrapper",
   "homepage": "https://github.com/larafale/mangopay",
   "author": "Louis Grellet @Larafale <as1cron@gmail.com>",
