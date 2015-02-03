@@ -281,10 +281,22 @@ Transfer e-money from a wallet to another wallet:
 
 For a complete list of available parameters check [http://docs.mangopay.com/api-references/transfers/](http://docs.mangopay.com/api-references/transfers/)
 
+Fetch transfer:
+
+```js
+    mango.wallet.fetchTransfer({
+        Id: "1167492", // Required
+    }, function(err, transfer, res){
+        console.log('err', err);
+        console.log('transfer', transfer);
+        console.log('res', res.statusCode);
+    });
+```
+
 Fetch all transactions for a given wallet: 
   
 ```js
-    mango.wallet.transaction({
+    mango.wallet.transactions({
       Id: "123456789", // Required
     }, function(err, transaction, res){
         console.log('err', err);
@@ -292,6 +304,31 @@ Fetch all transactions for a given wallet:
         console.log('res', res.statusCode);
     });
 ```
+
+Create refund:
+
+```js
+    mango.wallet.createRefund({         
+        Id: "1122477",        // Required (The ID of the Transfer)  
+        AuthorId: "1167492",  // Required (The user ID of the Transfer transaction’s author)    
+    }, function(err, refund, res){
+        console.log('err', err);
+        console.log('refund', refund);
+        console.log('res', res.statusCode);
+    })
+``` 
+
+Fetch refund:
+
+```js
+    mango.wallet.fetchRefund({         
+        Id: "1348477",        // Required (The ID of the Refund)  
+    }, function(err, refund, res){
+        console.log('err', err);
+        console.log('refund', refund);
+        console.log('res', res.statusCode);
+    })
+``` 
 
 * card
 
