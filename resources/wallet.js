@@ -46,7 +46,24 @@ module.exports = httpClient.extend({
       params: {
           'Id': { required: true }
       }
-    })
+    }),
+
+    createRefund: httpMethod({
+      method: 'POST',
+      path: '../transfers/{Id}/refunds',
+      params: {
+          'Id': { required: true }
+        , 'AuthorId': { required: true }
+      }
+    }),        
+
+    fetchRefund: httpMethod({
+      method: 'GET',
+      path: '../refunds/{Id}',
+      params: {
+          'Id': { required: true }
+      }
+    })    
 
   }
 
