@@ -14,7 +14,7 @@ function Mango(options){
     host: 'api.sandbox.mangopay.com',
     port: '',
     basePath: '/v2/' + this._options.username,
-    timeout: 30 * 1000
+    timeout: 120 * 1000
   }
 
   if(this._options.production)
