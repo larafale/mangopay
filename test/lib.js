@@ -41,6 +41,7 @@ describe('Natural User', function(){
 
   // Signup is a combo of user.create + wallet.create
   it('signup', function(done){
+    this.timeout(10000)
 
     mango.user.signup({ 
         Email: 'batman@domain.tld'
