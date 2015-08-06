@@ -1,3 +1,5 @@
+[![Circle CI](https://circleci.com/gh/larafale/mangopay.svg?&style=shield&circle-token=cb4fe61061baa5dc1826b33887aee7826150a681)](https://circleci.com/gh/larafale/mangopay)
+  
 # MangoPay nodejs APIv2 wrapper
 
 This is not the official Mangopay Node library.  
