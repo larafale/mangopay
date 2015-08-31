@@ -25,6 +25,18 @@ module.exports = httpClient.extend({
       }
     }),
 
+    createByWire: httpMethod({
+      method: 'POST',
+      path: '/bankwire/direct',
+      params: {
+          'AuthorId': { required: true }
+        , 'CreditedUserId': { required: true }
+        , 'DeclaredDebitedFunds': { required: true }
+        , 'DeclaredFees ': { required: true, default: { Currency: 'EUR', Amount: 0 } }
+        , 'CreditedWalletId': { required: true }
+      }
+    }),
+
     fetch: httpMethod({
       method: 'GET',
       path: '/{Id}',
