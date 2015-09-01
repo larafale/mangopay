@@ -80,7 +80,14 @@ Create natural user:
       Birthday: 1300186358,  // Required
       Nationality: "FR", // Required, default: 'FR'
       CountryOfResidence: "FR", // Required, default: 'FR'
-      Address: "1 rue des Misérables, Paris",
+      Address:  {
+         AddressLine1: "4101 Reservoir Rd NW",
+         AddressLine2: "",
+         City: "Washington",
+         Region: "District of Columbia",
+         PostalCode: "20007",
+         Country: "US"
+      }, 
       Occupation: "Writer", 
       IncomeRange: "6", 
       ProofOfIdentity: null,
@@ -104,7 +111,14 @@ Create natural user and wallet:
       Birthday: 1300186358,  // Required
       Nationality: "FR", // Required, default: 'FR'
       CountryOfResidence: "FR", // Required, default: 'FR'
-      Address: "1 rue des Misérables, Paris",
+      Address:  {                    // Required
+         AddressLine1: "4101 Reservoir Rd NW",
+         AddressLine2: "",
+         City: "Washington",
+         Region: "District of Columbia",
+         PostalCode: "20007",
+         Country: "US"
+      },
       Occupation: "Writer", 
       IncomeRange: "6", 
       ProofOfIdentity: null,
@@ -162,8 +176,22 @@ Create legal user:
       LegalRepresentativeFirstName: 'John',
       LegalRepresentativeLastName: 'Doe',
       LegalRepresentativeEmail: 'john_doe@mycompany.es',
-      HeadquartersAddress: 'Canal Street, Madrid, Spain',
-      LegalRepresentativeAdress: 'Canal Street, Madrid, Spain',
+      HeadquartersAddress:  {                    // Required
+         AddressLine1: "4101 Reservoir Rd NW",
+         AddressLine2: "",
+         City: "Washington",
+         Region: "District of Columbia",
+         PostalCode: "20007",
+         Country: "US"
+      },
+      LegalRepresentativeAdress:  {                    // Required
+         AddressLine1: "4101 Reservoir Rd NW",
+         AddressLine2: "",
+         City: "Washington",
+         Region: "District of Columbia",
+         PostalCode: "20007",
+         Country: "US"
+      },
       LegalRepresentativeBirthday: moment('300681', 'DDMMYY').unix(),
       LegalRepresentativeCountryOfResidence: 'ES',
       LegalRepresentativeNationality: 'ES',
@@ -397,7 +425,14 @@ Register a bank account for a user:
         OwnerName: "Victor Hugo",           // Required
         UserId: "1345678",                  // Required
         Type: "IBAN",                       // Required, Default: 'IBAN'
-        OwnerAddress: "1 rue des Misérables", // Required
+        OwnerAddress:  {                    // Required
+           AddressLine1: "4101 Reservoir Rd NW",
+           AddressLine2: "",
+           City: "Washington",
+           Region: "District of Columbia",
+           PostalCode: "20007",
+           Country: "US"
+        },
         IBAN: "FR3020041010124530725S03383", // Required
         BIC: "CRLYFRPP"                     // Required
     }, function(err, bankaccount, res){
