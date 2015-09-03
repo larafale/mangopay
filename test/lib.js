@@ -174,6 +174,7 @@ describe('Natural User', function(){
   describe('Cards', function(){
 
     it('initRegistration', function(done){
+      this.timeout(10000)
 
       mango.card.initRegistration({ 
           UserId: Users.batman.Id
@@ -217,6 +218,7 @@ describe('Legal User', function(){
     , Wallets = {}
 
   it('create', function(done){
+    this.timeout(10000)
 
     mango.user.createLegal({ 
         Name: 'mycompany.com'
