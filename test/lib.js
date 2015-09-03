@@ -7,10 +7,19 @@ var Creds = require('./__credentials.json')
   , utils = require('../lib/utils')
   , Mango = require('../index')
   , mango = Mango({
-      username: Creds.username,
-      password: Creds.password,
-      debug: false
+        username: Creds.username
+      , password: Creds.password
+      , version: 'v2.01'
+      , debug: false
     })
+
+var debug = function(args, index){
+  if(index !== undefined) console.log(args[index])
+  if(args[0]) console.log(args[0])
+}
+
+
+
 
 describe('Mango wrapper', function(){
 
@@ -18,12 +27,17 @@ describe('Mango wrapper', function(){
     expect(Mango.bind(null,{})).to.throw('Provide credentials')
   })
 
+  it('api version', function(){
+    assert.equal(mango._api.version, 'v2.01')
+  })
+
   it('use sandbox as default', function(){
     assert.equal(mango._api.host, 'api.sandbox.mangopay.com')
-    assert.equal(mango._api.protocol, 'https')
   })
 
 })
+
+
 
 describe('Utils', function(){
 
@@ -33,6 +47,8 @@ describe('Utils', function(){
   })
 
 })
+
+
 
 describe('Natural User', function(){
 
@@ -49,6 +65,7 @@ describe('Natural User', function(){
       , LastName: 'Wayne'
       , Birthday: moment('190984', 'DDMMYY').unix()
     }, function(err, user, wallet){
+      debug(arguments)
 
       Users.batman = user
       Wallets.batman = wallet
@@ -63,23 +80,57 @@ describe('Natural User', function(){
 
   })
   
+
+
   describe('Documents', function(){
 
     var Document
 
-    it('upload', function(done){
+    it('create', function(done){
+      this.timeout(10000)
+
+      mango.document.create({ 
+          UserId: Users.batman.Id
+        , Type: 'ADDRESS_PROOF'
+        , File: fs.readFileSync('test/file.jpg', 'base64')
+      }, function(err, doc){
+        debug(arguments)
+        assert.equal(doc.Status, 'CREATED')
+        done()
+      })
+    
+    })
+
+    it('createWithFile', function(done){
       this.timeout(10000)
 
       mango.document.create({ 
           UserId: Users.batman.Id
         , Type: 'IDENTITY_PROOF'
         , File: fs.readFileSync('test/file.jpg', 'base64')
+      }, function(err, doc){
+        debug(arguments)
 
-      }, function(createdDoc) {
-
-        Document = createdDoc
+        Document = doc
 
         assert.equal(Document.Status, 'CREATED')
+        done()
+      })
+    
+    })
+
+    it('addFile', function(done){
+      this.timeout(10000)
+
+      mango.document.addFile({ 
+          UserId: Users.batman.Id
+        , DocumentId: Document.Id
+        , File: fs.readFileSync('test/file.jpg', 'base64')
+      }, function(err, noContent, res){
+        debug(arguments)
+
+        // adding a page to document return a 204 No Content
+        assert.equal(res.statusCode, 204)
         done()
       })
     
@@ -91,9 +142,11 @@ describe('Natural User', function(){
       mango.document.fetch({ 
           UserId: Users.batman.Id
         , Id: Document.Id
-      }, function(err, doc) {
+      }, function(err, doc){
+        debug(arguments)
         assert.equal(doc.Id, Document.Id)
         assert.equal(doc.Status, 'CREATED')
+        assert.equal(doc.Type, 'IDENTITY_PROOF')
         done(err)
       })
     
@@ -106,7 +159,8 @@ describe('Natural User', function(){
           UserId: Users.batman.Id
         , Id: Document.Id
         , Status: 'VALIDATION_ASKED'
-      }, function(err, doc) {
+      }, function(err, doc){
+        debug(arguments)
         assert.equal(doc.Status, 'VALIDATION_ASKED')
         done(err)
       })
@@ -115,15 +169,17 @@ describe('Natural User', function(){
   
   })
 
+
   
   describe('Cards', function(){
 
-    it('init Registration', function(done){
+    it('initRegistration', function(done){
 
       mango.card.initRegistration({ 
           UserId: Users.batman.Id
         , Currency: "EUR"
-      }, function(err, cardRegistration) {
+      }, function(err, cardRegistration){
+        debug(arguments)
         expect(cardRegistration.AccessKey).not.to.be.null
         done(err)
       })
@@ -139,6 +195,7 @@ describe('Natural User', function(){
         CardExpirationDate: '0216',
         CardCvx: '123',
       }, function(err, card){
+        debug(arguments)
         expect(card).to.have.property('CardId')
         assert.equal(card.Status, 'VALIDATED')
         done(err)
@@ -149,6 +206,9 @@ describe('Natural User', function(){
   })
 
 })
+
+
+
 
 
 describe('Legal User', function(){
@@ -165,13 +225,17 @@ describe('Legal User', function(){
       , LegalRepresentativeFirstName: 'John'
       , LegalRepresentativeLastName: 'Doe'
       , LegalRepresentativeEmail: 'john_doe@mycompany.es'
-      , HeadquartersAddress: 'Canal Street, Madrid, Spain'
       , LegalRepresentativeAdress: 'Canal Street, Madrid, Spain'
       , LegalRepresentativeBirthday: moment('300681', 'DDMMYY').unix()
       , LegalRepresentativeCountryOfResidence: 'ES'
       , LegalRepresentativeNationality: 'ES'
 
-    }, function(err, user){
+      // implent test for v2.01 https://docs.mangopay.com/api-v2-01-overview/
+      // handle new address 
+      // , HeadquartersAddress: 'Canal Street, Madrid, Spain' 
+   
+    }, function(err, user, res){
+      debug(arguments)
 
       Users.john = user
 

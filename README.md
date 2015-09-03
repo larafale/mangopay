@@ -75,19 +75,26 @@ Create natural user:
   
 ```js
     mango.user.create({
-      FirstName: "Victor", // Required
-      LastName: "Hugo",    // Required
-      Birthday: 1300186358,  // Required
-      Nationality: "FR", // Required, default: 'FR'
-      CountryOfResidence: "FR", // Required, default: 'FR'
-      Address: "1 rue des Misérables, Paris",
-      Occupation: "Writer", 
-      IncomeRange: "6", 
-      ProofOfIdentity: null,
-      ProofOfAddress: null, 
-      PersonType: "NATURAL", 
-      Email: "victor@hugo.com", 
-      Tag: "custom tag",
+        FirstName:             "Victor"           // Required
+      , LastName:              "Hugo"             // Required
+      , Birthday:              1300186358         // Required
+      , Nationality:           "FR"               // Required - default: 'FR'
+      , CountryOfResidence:    "FR"               // Required - default: 'FR'
+      , Occupation:            "Writer" 
+      , IncomeRange:           "6" 
+      , ProofOfIdentity:       ""
+      , ProofOfAddress:        "" 
+      , PersonType:            "NATURAL" 
+      , Email:                 "victor@hugo.com" 
+      , Tag:                   "custom tag"
+      , Address:                 {
+            AddressLine1: "4101 Reservoir Rd NW"
+          , AddressLine2: ""
+          , City: "Washington"
+          , Region: "District of Columbia"
+          , PostalCode: "20007"
+          , Country: "US"
+      , }
     }, function(err, user, res){
         console.log('err', err);
         console.log('user', user);
@@ -460,7 +467,8 @@ Get wire:
 
 * document
   * `create(params)`
-  * `createPage(params)`
+  * `createWithFile(params)`
+  * `addFile(params)`
   * `fetch(params)`
   * `update(params)`
   
