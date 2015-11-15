@@ -119,10 +119,10 @@ Create natural user and wallet:
       PersonType: "NATURAL", 
       Email: "victor@hugo.com", 
       Tag: "custom tag",
-    }, function(err, wallet, res){
+    }, function(err, user, wallet){
         console.log('err', err);
+        console.log('user', user);
         console.log('wallet', wallet);
-        console.log('res', res.statusCode);
     });
 ```
 
