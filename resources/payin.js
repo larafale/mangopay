@@ -18,7 +18,7 @@ module.exports = httpClient.extend({
         , 'CreditedUserId': { required: true }
         , 'DebitedFunds': { required: true }
         , 'Fees': { required: true, default: { Currency: 'EUR', Amount: 0 } }
-        , 'CreditedWalletId': { required: true }        
+        , 'CreditedWalletId': { required: true }
         , 'SecureModeReturnURL': { required: true }
         , 'CardId': { required: true }
         , 'SecureMode': { default: 'DEFAULT' }
@@ -34,6 +34,21 @@ module.exports = httpClient.extend({
         , 'DeclaredDebitedFunds': { required: true }
         , 'DeclaredFees ': { required: true, default: { Currency: 'EUR', Amount: 0 } }
         , 'CreditedWalletId': { required: true }
+      }
+    }),
+
+    createByCard: httpMethod({
+      method: 'POST',
+      path: '/card/web',
+      params: {
+          'AuthorId': { required: true }
+        , 'DebitedFunds': { required: true }
+        , 'DeclaredFees ': { required: true, default: { Currency: 'EUR', Amount: 0 } }
+        , 'CreditedWalletId': { required: true }
+        , 'ReturnURL': { required: true }
+        , 'Culture': { required: true }
+        , 'CardType': { required: true }
+        , 'Tag': { required: false }
       }
     }),
 
