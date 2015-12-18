@@ -25,6 +25,21 @@ module.exports = httpClient.extend({
       }
     }),
 
+    createByWeb: httpMethod({
+      method: 'POST',
+      path: '/card/web',
+      params: {
+          'AuthorId': { required: true }
+        , 'DebitedFunds': { required: true }
+        , 'Fees': { required: true, default: { Currency: 'EUR', Amount: 0 } }
+        , 'CreditedWalletId': { required: true }        
+        , 'ReturnURL': { required: true }
+        , 'Culture': { required: true }
+        , 'CardType': { required: true }
+        , 'SecureMode': { default: 'DEFAULT' }
+      }
+    }),
+
     createByWire: httpMethod({
       method: 'POST',
       path: '/bankwire/direct',
