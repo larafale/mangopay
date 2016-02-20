@@ -33,7 +33,8 @@ module.exports = httpClient.extend({
         , 'Currency': { required: true, default: 'EUR' }
         , 'CardNumber': { required: true, default: '4970100000000154' }
         , 'CardExpirationDate': { required: true, default: '0216' }
-        , 'CardCvx': { required: true, default: '123' }
+        , 'CardCvx': { required: false, default: '123' }
+        , 'CardType': { required: true, default: 'CB_VISA_MASTERCARD' }// 'CB_VISA_MASTERCARD | MAESTRO | DINERS
       }
     }, function(err, body, res, params, next){
         var self = this
@@ -48,7 +49,8 @@ module.exports = httpClient.extend({
           accessKeyRef: body.AccessKey,
           cardNumber: params.CardNumber,
           cardExpirationDate: params.CardExpirationDate,
-          cardCvx: params.CardCvx
+          cardCvx: params.CardCvx,
+          cardType : params.CardType
         }
 
         this.sendCardDetails.call(self, body, cardDetails, next)
