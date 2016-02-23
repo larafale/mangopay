@@ -501,6 +501,33 @@ Create a direct payin by tokenized card:
     })
 ```
 
+Create a direct payin by card:
+
+```js
+    mango.payin.createByCard({         
+        AuthorId: "1167492",        // Required (The user ID of the Payin transaction’s author)
+        CreditedUserId : "1167502", // Required (The ID of the owner of the credited wallet)
+        DebitedFunds: {             // Required
+              Currency: "EUR",
+              Amount: 10000
+        },
+        DeclaredFees: {               // Required
+              Currency: "EUR",
+              Amount: 100
+        },
+        CreditedWalletId: "1167810",  // Required (The ID of the credited wallet)
+        ReturnURL:"https://www.mysite.com",
+        Culture: "nl",
+        CardType: "IDEAL",            // Required
+        Tag: "payin" // Required
+  
+    }, function(err, payin, res){
+        console.log('err', err);
+        console.log('payin', payin);
+        console.log('res', res.statusCode);
+    })
+```
+
 Fetch payin:
 
 ```js
