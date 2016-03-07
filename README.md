@@ -44,7 +44,7 @@ mango.card.create({
 })
 ```
 
-The callback gets called with three arguments: err, data and the raw response object. In case of an error, the data and response are still passed because the MangoPay API returns data together with errors, e.g. when attempting to retrieve a failed payOut.
+The callback gets called with three arguments: `err`, `data` and the raw `response` object. In case of an error, the data and response are still passed because the MangoPay API returns data together with errors, e.g. when attempting to retrieve a failed payOut.
 
 Methods that list items (cards, transactions, users, etc...) can paginate, filter and sort fields using a special `$query` parameter:
 
