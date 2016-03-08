@@ -1,5 +1,6 @@
 var assert = require('chai').assert
   , expect = require('chai').expect
+  , faker = require('faker')
   , moment = require('moment')
   , fs = require('fs')
 
@@ -51,6 +52,23 @@ describe('Utils', function(){
 
 
 describe('Natural User', function(){
+  // Signup is a combo of user.create + wallet.create
+  it('does not fail with birthay with unix timestamp 0', function(done){
+    this.timeout(10000)
+    mango.user.signup({
+      Email: faker.internet.email()
+      , FirstName: faker.name.firstName()
+      , LastName: faker.name.lastName()
+      , Birthday: 0
+    }, function(err, user, wallet){
+      debug(arguments)
+
+      expect(user).to.have.property('Id')
+      expect(wallet).to.have.property('Id')
+
+      done(err)
+    })
+  })
 
   var Users = {}
     , Wallets = {}
@@ -59,7 +77,7 @@ describe('Natural User', function(){
   it('signup', function(done){
     this.timeout(10000)
 
-    mango.user.signup({ 
+    mango.user.signup({
         Email: 'batman@domain.tld'
       , FirstName: 'Bruce'
       , LastName: 'Wayne'
@@ -79,8 +97,6 @@ describe('Natural User', function(){
     })
 
   })
-  
-
 
   describe('Documents', function(){
 
@@ -89,7 +105,7 @@ describe('Natural User', function(){
     it('create', function(done){
       this.timeout(10000)
 
-      mango.document.create({ 
+      mango.document.create({
           UserId: Users.batman.Id
         , Type: 'ADDRESS_PROOF'
         , File: fs.readFileSync('test/file.jpg', 'base64')
@@ -98,13 +114,13 @@ describe('Natural User', function(){
         assert.equal(doc.Status, 'CREATED')
         done()
       })
-    
+
     })
 
     it('createWithFile', function(done){
       this.timeout(10000)
 
-      mango.document.create({ 
+      mango.document.create({
           UserId: Users.batman.Id
         , Type: 'IDENTITY_PROOF'
         , File: fs.readFileSync('test/file.jpg', 'base64')
@@ -116,13 +132,13 @@ describe('Natural User', function(){
         assert.equal(Document.Status, 'CREATED')
         done()
       })
-    
+
     })
 
     it('addFile', function(done){
       this.timeout(10000)
 
-      mango.document.addFile({ 
+      mango.document.addFile({
           UserId: Users.batman.Id
         , DocumentId: Document.Id
         , File: fs.readFileSync('test/file.jpg', 'base64')
@@ -133,13 +149,13 @@ describe('Natural User', function(){
         assert.equal(res.statusCode, 204)
         done()
       })
-    
+
     })
 
     it('fetch', function(done){
       this.timeout(10000)
 
-      mango.document.fetch({ 
+      mango.document.fetch({
           UserId: Users.batman.Id
         , Id: Document.Id
       }, function(err, doc){
@@ -149,13 +165,13 @@ describe('Natural User', function(){
         assert.equal(doc.Type, 'IDENTITY_PROOF')
         done(err)
       })
-    
+
     })
 
     it('update', function(done){
       this.timeout(5000)
 
-      mango.document.update({ 
+      mango.document.update({
           UserId: Users.batman.Id
         , Id: Document.Id
         , Status: 'VALIDATION_ASKED'
@@ -166,17 +182,17 @@ describe('Natural User', function(){
       })
 
     })
-  
+
   })
 
 
-  
+
   describe('Cards', function(){
 
     it('initRegistration', function(done){
       this.timeout(10000)
 
-      mango.card.initRegistration({ 
+      mango.card.initRegistration({
           UserId: Users.batman.Id
         , Currency: "EUR"
       }, function(err, cardRegistration){
@@ -190,7 +206,7 @@ describe('Natural User', function(){
     it('create', function(done){
       this.timeout(10000)
 
-      mango.card.create({ 
+      mango.card.create({
         UserId: Users.batman.Id,
         CardNumber: '4970100000000154',
         CardExpirationDate: '0220',
@@ -220,7 +236,7 @@ describe('Legal User', function(){
   it('create', function(done){
     this.timeout(10000)
 
-    mango.user.createLegal({ 
+    mango.user.createLegal({
         Name: 'mycompany.com'
       , Email: 'info@mycompany.com'
       , LegalPersonType: 'BUSINESS'
@@ -233,9 +249,9 @@ describe('Legal User', function(){
       , LegalRepresentativeNationality: 'ES'
 
       // implent test for v2.01 https://docs.mangopay.com/api-v2-01-overview/
-      // handle new address 
-      // , HeadquartersAddress: 'Canal Street, Madrid, Spain' 
-   
+      // handle new address
+      // , HeadquartersAddress: 'Canal Street, Madrid, Spain'
+
     }, function(err, user, res){
       debug(arguments)
 
@@ -248,11 +264,3 @@ describe('Legal User', function(){
   })
 
 })
-
-
-
-
-
-
-  
-
