@@ -49,6 +49,18 @@ describe('Utils', function(){
 
 })
 
+describe('HttpMethod', function(){
+  it('should call callback with error when parameter is missing', function(done){
+    mango.user.signup({
+      Email: faker.internet.email()
+    }, function(err) {
+      expect(err).to.be.ok;
+      expect(err.message).to.equal('parameter "FirstName" is required');
+      done();
+    })
+  })
+})
+
 
 
 describe('Natural User', function(){
