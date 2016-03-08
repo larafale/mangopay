@@ -193,7 +193,7 @@ describe('Natural User', function(){
       mango.card.create({ 
         UserId: Users.batman.Id,
         CardNumber: '4970100000000154',
-        CardExpirationDate: '0216',
+        CardExpirationDate: '0220',
         CardCvx: '123',
       }, function(err, card){
         debug(arguments)
