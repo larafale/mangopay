@@ -54,6 +54,7 @@ describe('Utils', function(){
 describe('Natural User', function(){
   // Signup is a combo of user.create + wallet.create
   it('does not fail with birthay with unix timestamp 0', function(done){
+    this.timeout(10000)
     mango.user.signup({
       Email: faker.internet.email()
       , FirstName: faker.name.firstName()
