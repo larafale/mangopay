@@ -82,8 +82,12 @@ module.exports = httpClient.extend({
 
     cards: httpMethod({
       method: 'GET',
-      path: '{UserId}/cards',
-      params: { 'UserId': { required: true } }
+      path: '{UserId}/cards?per_page={per_page}&page={page}',
+      params: {
+         'UserId': { required: true },
+         'per_page': { required: false, default: '10' },
+         'page': { required: false, default: '0' } 
+        }
     }),
 
     wallets: httpMethod({
