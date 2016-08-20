@@ -473,6 +473,41 @@ Get wire:
   * `addFile(params)`
   * `fetch(params)`
   * `update(params)`
+
+Get document with userId: 
+
+```js
+    mango.document.fetch({ 
+      UserId: '12567875',   // Required
+      Id: '2568348',        // Required
+    }, function(err, document, res){
+        console.log('err', err);
+        console.log('document', document);
+        console.log('res', res.statusCode);
+    })
+```
+
+* kyc
+
+Get document with its own id (without userId): 
+```js
+    mango.kyc.fetch({ 
+      Id: '2568348', // Required
+    }, function(err, document, res){
+        console.log('err', err);
+        console.log('document', document);
+        console.log('res', res.statusCode);
+    })
+```
+
+List all KYC documents: 
+```js
+    mango.kyc.list(function(err, documents, res){
+        console.log('err', err);
+        console.log('documents', documents);
+        console.log('res', res.statusCode);
+    })
+```
   
 * payin
 

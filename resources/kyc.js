@@ -8,6 +8,8 @@ module.exports = httpClient.extend({
   // But sometimes, you want to fetch documents by their Id, without UserId.
   // That's why this 'kyc' resource exists.
   path: 'kyc/documents',
+      
+  includeBasic: [ 'list' ], // See: https://docs.mangopay.com/endpoints/v2.01/kyc-documents#e217_list-all-kyc-documents
   
   methods: {
 
@@ -20,14 +22,6 @@ module.exports = httpClient.extend({
       requiredParams: ['Id'],
     })
 
-    /*
-      See: https://docs.mangopay.com/endpoints/v2.01/kyc-documents#e217_list-all-kyc-documents
-    */
-    list: httpMethod({
-      method: 'GET',
-      path: '',
-    }),
-  
   }
 
 })
