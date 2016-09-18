@@ -464,6 +464,20 @@ Get wire:
     })
 ```
 
+Update a registered bank account: 
+
+The only editable parameter is `Active`, that can be switched from true to false and this action is irreversible.
+  
+```js
+    mango.bank.update({
+      Id: "2565355", // Required
+    }, function(err, bank, res){
+        console.log('err', err);
+        console.log('bank', bank);
+        console.log('res', res.statusCode);
+    });
+```
+
 * author
   * `create(params)`
 
