@@ -9,9 +9,6 @@
     "type": "git",
     "url": "git://github.com/larafale/mangopay.git"
   },
-  // "engines": {
-  //   "node": "0.10.x"
-  // },
   "devDependencies": {
     "chai": "~1.9.1",
     "faker": "^3.0.1",
