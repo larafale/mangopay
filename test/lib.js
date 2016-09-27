@@ -20,6 +20,8 @@ var debug = function(args, index){
 }
 
 
+var savedcard = null;
+
 
 
 describe('Mango wrapper', function(){
@@ -225,8 +227,25 @@ describe('Natural User', function(){
         CardCvx: '123',
       }, function(err, card){
         debug(arguments)
+        savedcard=card
         expect(card).to.have.property('CardId')
         assert.equal(card.Status, 'VALIDATED')
+        done(err)
+      })
+
+    })
+
+    it('preAuthorization', function(done){
+      this.timeout(10000)
+      mango.card.preAuthorization({
+        AuthorId: Users.batman.Id,
+        DebitedFunds: { Amount: 100, Currency:"EUR" },
+        CardId:savedcard.CardId,
+        SecureModeReturnURL:"https://example.com/SecureModeReturnURL"
+      }, function(err, cardAuth){
+        debug(arguments)
+        expect(cardAuth).to.have.property('CardId')
+        assert.equal(cardAuth.Status, 'SUCCEEDED')
         done(err)
       })
 
