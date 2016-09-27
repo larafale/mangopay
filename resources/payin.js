@@ -18,10 +18,52 @@ module.exports = httpClient.extend({
         , 'CreditedUserId': { required: true }
         , 'DebitedFunds': { required: true }
         , 'Fees': { required: true, default: { Currency: 'EUR', Amount: 0 } }
-        , 'CreditedWalletId': { required: true }        
+        , 'CreditedWalletId': { required: true }
         , 'SecureModeReturnURL': { required: true }
         , 'CardId': { required: true }
         , 'SecureMode': { default: 'DEFAULT' }
+      }
+    }),
+
+    createByWeb: httpMethod({
+      method: 'POST',
+      path: '/card/web',
+      params: {
+          'AuthorId': { required: true }
+        , 'DebitedFunds': { required: true }
+        , 'Fees': { required: true, default: { Currency: 'EUR', Amount: 0 } }
+        , 'CreditedWalletId': { required: true }        
+        , 'ReturnURL': { required: true }
+        , 'Culture': { required: true }
+        , 'CardType': { required: true }
+        , 'SecureMode': { default: 'DEFAULT' }
+      }
+    }),
+
+    createByWire: httpMethod({
+      method: 'POST',
+      path: '/bankwire/direct',
+      params: {
+          'AuthorId': { required: true }
+        , 'CreditedUserId': { required: true }
+        , 'DeclaredDebitedFunds': { required: true }
+        , 'DeclaredFees ': { required: true, default: { Currency: 'EUR', Amount: 0 } }
+        , 'CreditedWalletId': { required: true }
+      }
+    }),
+
+    createByCard: httpMethod({
+      method: 'POST',
+      path: '/card/web',
+      params: {
+          'AuthorId': { required: true }
+        , 'DebitedFunds': { required: true }
+        , 'DeclaredFees ': { required: true, default: { Currency: 'EUR', Amount: 0 } }
+        , 'CreditedWalletId': { required: true }
+        , 'ReturnURL': { required: true }
+        , 'Culture': { required: true }
+        , 'CardType': { required: true }
+        , 'Tag': { required: false }
       }
     }),
 

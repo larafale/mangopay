@@ -6,7 +6,7 @@ module.exports = httpClient.extend({
   
   path: 'wallets',
   
-  includeBasic: [ 'fetch' ],
+  includeBasic: [ 'fetch', 'update' ],
 
   methods: {
 
@@ -30,7 +30,15 @@ module.exports = httpClient.extend({
         , 'DebitedWalletID': { required: true }
         , 'CreditedWalletID': { required: true }
       }
-    }),   
+    }),
+
+    fetchTransfer: httpMethod({
+      method: 'GET',
+      path: '../transfers/{Id}',
+      params: {
+        'Id': { required: true }
+      }
+    }),
         
     transactions: httpMethod({
       method: 'GET',
@@ -38,7 +46,24 @@ module.exports = httpClient.extend({
       params: {
           'Id': { required: true }
       }
-    })
+    }),
+
+    createRefund: httpMethod({
+      method: 'POST',
+      path: '../transfers/{Id}/refunds',
+      params: {
+          'Id': { required: true }
+        , 'AuthorId': { required: true }
+      }
+    }),        
+
+    fetchRefund: httpMethod({
+      method: 'GET',
+      path: '../refunds/{Id}',
+      params: {
+          'Id': { required: true }
+      }
+    })    
 
   }
 

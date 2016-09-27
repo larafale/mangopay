@@ -1,3 +1,5 @@
+[![Circle CI](https://circleci.com/gh/larafale/mangopay.svg?&style=shield&circle-token=cb4fe61061baa5dc1826b33887aee7826150a681)](https://circleci.com/gh/larafale/mangopay)
+  
 # MangoPay nodejs APIv2 wrapper
 
 This is not the official Mangopay Node library.  
@@ -36,11 +38,13 @@ mango.card.create({
   CardExpirationDate: '0216',
   CardCvx: '123',
 }, function(err, card, res){
-  err;	
+  err;
   card; // mango card object 
   res; // raw 'http' response object => res.statusCode === 200
 })
 ```
+
+The callback gets called with three arguments: `err`, `data` and the raw `response` object. In case of an error, the data and response are still passed because the MangoPay API returns data together with errors, e.g. when attempting to retrieve a failed payOut.
 
 Methods that list items (cards, transactions, users, etc...) can paginate, filter and sort fields using a special `$query` parameter:
 
@@ -73,19 +77,26 @@ Create natural user:
   
 ```js
     mango.user.create({
-      FirstName: "Victor", // Required
-      LastName: "Hugo",    // Required
-      Birthday: 1300186358,  // Required
-      Nationality: "FR", // Required, default: 'FR'
-      CountryOfResidence: "FR", // Required, default: 'FR'
-      Address: "1 rue des Misérables, Paris",
-      Occupation: "Writer", 
-      IncomeRange: "6", 
-      ProofOfIdentity: null,
-      ProofOfAddress: null, 
-      PersonType: "NATURAL", 
-      Email: "victor@hugo.com", 
-      Tag: "custom tag",
+        FirstName:             "Victor"           // Required
+      , LastName:              "Hugo"             // Required
+      , Birthday:              1300186358         // Required
+      , Nationality:           "FR"               // Required - default: 'FR'
+      , CountryOfResidence:    "FR"               // Required - default: 'FR'
+      , Occupation:            "Writer" 
+      , IncomeRange:           "6" 
+      , ProofOfIdentity:       ""
+      , ProofOfAddress:        "" 
+      , PersonType:            "NATURAL" 
+      , Email:                 "victor@hugo.com" 
+      , Tag:                   "custom tag"
+      , Address:                 {
+            AddressLine1: "4101 Reservoir Rd NW"
+          , AddressLine2: ""
+          , City: "Washington"
+          , Region: "District of Columbia"
+          , PostalCode: "20007"
+          , Country: "US"
+      , }
     }, function(err, user, res){
         console.log('err', err);
         console.log('user', user);
@@ -110,10 +121,10 @@ Create natural user and wallet:
       PersonType: "NATURAL", 
       Email: "victor@hugo.com", 
       Tag: "custom tag",
-    }, function(err, wallet, res){
+    }, function(err, user, wallet){
         console.log('err', err);
+        console.log('user', user);
         console.log('wallet', wallet);
-        console.log('res', res.statusCode);
     });
 ```
 
@@ -281,10 +292,22 @@ Transfer e-money from a wallet to another wallet:
 
 For a complete list of available parameters check [http://docs.mangopay.com/api-references/transfers/](http://docs.mangopay.com/api-references/transfers/)
 
+Fetch transfer:
+
+```js
+    mango.wallet.fetchTransfer({
+        Id: "1167492", // Required
+    }, function(err, transfer, res){
+        console.log('err', err);
+        console.log('transfer', transfer);
+        console.log('res', res.statusCode);
+    });
+```
+
 Fetch all transactions for a given wallet: 
   
 ```js
-    mango.wallet.transaction({
+    mango.wallet.transactions({
       Id: "123456789", // Required
     }, function(err, transaction, res){
         console.log('err', err);
@@ -292,6 +315,31 @@ Fetch all transactions for a given wallet:
         console.log('res', res.statusCode);
     });
 ```
+
+Create refund:
+
+```js
+    mango.wallet.createRefund({         
+        Id: "1122477",        // Required (The ID of the Transfer)  
+        AuthorId: "1167492",  // Required (The user ID of the Transfer transaction’s author)    
+    }, function(err, refund, res){
+        console.log('err', err);
+        console.log('refund', refund);
+        console.log('res', res.statusCode);
+    })
+``` 
+
+Fetch refund:
+
+```js
+    mango.wallet.fetchRefund({         
+        Id: "1348477",        // Required (The ID of the Refund)  
+    }, function(err, refund, res){
+        console.log('err', err);
+        console.log('refund', refund);
+        console.log('res', res.statusCode);
+    })
+``` 
 
 * card
 
@@ -421,7 +469,8 @@ Get wire:
 
 * document
   * `create(params)`
-  * `createPage(params)`
+  * `createWithFile(params)`
+  * `addFile(params)`
   * `fetch(params)`
   * `update(params)`
   
@@ -447,6 +496,33 @@ Create a direct payin by tokenized card:
         SecureModeReturnURL:"https://www.mysite.com",
         Tag: "payin" // Required
 
+    }, function(err, payin, res){
+        console.log('err', err);
+        console.log('payin', payin);
+        console.log('res', res.statusCode);
+    })
+```
+
+Create a direct payin by card:
+
+```js
+    mango.payin.createByCard({         
+        AuthorId: "1167492",        // Required (The user ID of the Payin transaction’s author)
+        CreditedUserId : "1167502", // Required (The ID of the owner of the credited wallet)
+        DebitedFunds: {             // Required
+              Currency: "EUR",
+              Amount: 10000
+        },
+        DeclaredFees: {               // Required
+              Currency: "EUR",
+              Amount: 100
+        },
+        CreditedWalletId: "1167810",  // Required (The ID of the credited wallet)
+        ReturnURL:"https://www.mysite.com",
+        Culture: "nl",
+        CardType: "IDEAL",            // Required
+        Tag: "payin" // Required
+  
     }, function(err, payin, res){
         console.log('err', err);
         console.log('payin', payin);

@@ -9,18 +9,26 @@ function Mango(options){
   this._options = options || {}
 
   this._api = {
-    auth: false,
-    protocol: 'https',
-    host: 'api.sandbox.mangopay.com',
-    port: '',
-    basePath: '/v2/' + this._options.username,
-    timeout: 30 * 1000
+      auth: false
+    , protocol: 'https'
+    , host: 'api.sandbox.mangopay.com'
+    , port: ''
+    , basePath: ''
+    , version: this._options.version || 'v2'
+    , timeout: 120 * 1000
   }
 
+  // set base path
+  this._api.basePath = ['/', this._api.version, '/', this._options.username].join('')
+  
+  // switch to production url
   if(this._options.production)
     this._api.host = 'api.mangopay.com'
 
-  this.mount(this._options.mount || 'user|card|wallet|author|bank|document|payin|hook')
+  // mount endpoints
+  this.mount(this._options.mount || 'user|card|wallet|author|bank|document|payin|hook|event')
+
+  // set auth
   this.setAuth(options)
 }
 
