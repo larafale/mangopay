@@ -9,9 +9,9 @@ var qs = require('querystring')
 var Url = require('url')
 
 module.exports = httpClient.extend({
-  
+
   path: 'cardregistrations',
-  
+
   includeBasic: [ ],
 
   methods: {
@@ -80,10 +80,10 @@ module.exports = httpClient.extend({
         var body = ''
         res.setEncoding('utf8')
         res.on('data', function(chunk){ body += chunk })
-        res.on('end', function(){ 
+        res.on('end', function(){
 
           body = qs.parse(body)
-          
+
           if(body.errorCode)
             return next.call(self, error(body.errorCode))
 
@@ -119,11 +119,23 @@ module.exports = httpClient.extend({
 
   },
 
+  preAuthorization: httpMethod({
+      method: 'POST',
+      path: '../preauthorizations/card/direct',
+      params: {
+        "AuthorId": { required: true },
+        "DebitedFunds": { required: true },
+        "SecureMode": { default: 'DEFAULT' },
+        "CardId": { required: true },
+        "SecureModeReturnURL": { required: true }
+      }
+  }),
+
   fetch: httpMethod({
       method: 'GET',
       path: '../cards/{Id}',
       params: {
-          'Id': { required: true }    
+          'Id': { required: true }
       }
   }),
 
@@ -131,7 +143,7 @@ module.exports = httpClient.extend({
       method: 'PUT',
       path: '../cards/{Id}',
       params: {
-          'Id': { required: true }    
+          'Id': { required: true }
       }
   })
 
