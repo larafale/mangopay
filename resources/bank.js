@@ -45,6 +45,15 @@ module.exports = httpClient.extend({
       method: 'GET',
       path: '../payouts/{Id}',
       params: { 'Id': { required: true } }
+    }),
+
+    update: httpMethod({
+      method: 'PUT',
+      path: '{UserId}/bankaccounts/{BankId}',
+      params: {
+          'UserId': { required: true }
+        , 'BankId': { required: true }
+      }
     })
 
   }

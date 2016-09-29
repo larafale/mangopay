@@ -464,6 +464,20 @@ Get wire:
     })
 ```
 
+Update a registered bank account: 
+
+The only editable parameter is `Active`, that can be switched from true to false and this action is irreversible.
+  
+```js
+    mango.bank.update({
+      Id: "2565355", // Required
+    }, function(err, bank, res){
+        console.log('err', err);
+        console.log('bank', bank);
+        console.log('res', res.statusCode);
+    });
+```
+
 * author
   * `create(params)`
 
@@ -619,6 +633,23 @@ update hook:
     })
 ```
 
+### Idempotency support
+
+To leverage Mangopay's idempotency support, you can specify an `$idempotencyKey` parameter:
+
+```js
+    mango.user.update({
+      Id: "123456789",
+      $idempotencyKey: "a_valid_idempotency_key"
+      // all the fields to be updated
+    }, function(err, user, res){
+        console.log('err', err);
+        console.log('user', user);
+        console.log('res', res.statusCode);
+    });
+```
+
+Note that the idempotency key must be between 16 and 36 characters and contain only alphanumeric characters or dashes.
 
 ### Test
 
