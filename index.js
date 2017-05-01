@@ -26,7 +26,7 @@ function Mango(options){
     this._api.host = 'api.mangopay.com'
 
   // mount endpoints
-  this.mount(this._options.mount || 'user|card|wallet|author|bank|document|payin|hook|event|dispute|settlement|payout')
+  this.mount(this._options.mount || 'user|card|wallet|author|bank|document|payin|hook|event')
 
   // set auth
   this.setAuth(options)
