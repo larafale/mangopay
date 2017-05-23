@@ -1,5 +1,7 @@
 [![Circle CI](https://circleci.com/gh/larafale/mangopay.svg?&style=shield&circle-token=cb4fe61061baa5dc1826b33887aee7826150a681)](https://circleci.com/gh/larafale/mangopay)
   
+## ATTENTION. Please migrate to last version of this lib as it fixes a security flaw. Please check below on how to handle card registration from now on.  
+
 # MangoPay nodejs APIv2 wrapper
 
 This is not the official Mangopay Node library.  
@@ -343,32 +345,44 @@ Fetch refund:
 
 * card
 
-Register a card:
-
-```js
-    mango.card.create({ 
-      UserId: '2565355',
-      CardNumber: '4970100000000154',
-      CardExpirationDate: '0216',
-      CardCvx: '123',
-    }, function(err, card, res){
-      err;	
-      card; // mango card object 
-      res; // raw 'http' response object => res.statusCode === 200
-    })
-```
-
 Init two-step card registration process:
 
+You should run this on the browser
+
+The code below depends on https://github.com/Mangopay/cardregistration-js-kit
 ```js
     mango.card.initRegistration({ 
       UserId: '2565355',
       Currency: "EUR"
     }, function(err, registration, res){
-      err;  
-      registration; // mango registration object 
+      err;
       res; // raw 'http' response object => res.statusCode === 200
-    })
+      registration; // mango registration object
+      var payload = {
+        cardNumber: '4354243243523124',
+        cardExpirationDate: '1220',
+        cardCvx: '123'
+      };
+      // mangoPay -> https://github.com/Mangopay/cardregistration-js-kit
+      mangoPay.cardRegistration.init({
+        cardRegistrationURL: registration.CardRegistrationURL,
+        preregistrationData: registration.PreregistrationData,
+        accessKey: registration.AccessKey,
+        Id: registration.Id
+      });
+
+      // connecting directly to PSP and Mongopay API
+      mangoPay.cardRegistration.registerCard(
+        payload,
+        function(res){ // success
+          console.log(res)
+        },
+         function(err){ // fail
+          console.log(err)
+        }
+      );
+      
+    });
 ```
 
 Fetch a registered card:
